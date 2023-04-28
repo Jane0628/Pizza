@@ -24,11 +24,11 @@ public class AppUI {
 	}
 	
 	//사장님인지 고객인지
-		public static void bossOrCustomer() {
-			System.out.println("\n========== 뭘 하실건가요? ==========");
+		public static void checkBossOrCustomer() {
+			System.out.println("\n---------- 진행하실 메뉴의 번호를 입력해주세요 ----------");
 			System.out.println("1. 관리");
 			System.out.println("2. 주문");
-			System.out.println("--------------------------------------");
+			System.out.println("---------------------------------------------------------");
 			System.out.print(">>> ");
 		}
 		
