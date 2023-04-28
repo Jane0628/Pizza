@@ -1,0 +1,13 @@
+<mxfile host="app.diagrams.net" modified="2023-04-27T06:25:25.417Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="NDpbW5uGqctDNmy9tc-K" version="21.2.1" type="device">
+  <diagram name="페이지-1" id="MIzfcb-dMOmaOe7L2aH7">
+    <mxGraphModel dx="1044" dy="522" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="gozrxqvPoM01i5FAuu6J-2" value="&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;생일 정보 &amp;gt; 생일 당일에 주문 시 30% 할인&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;회원 &amp;gt; 스탬프 모아서 같은 지점에서 10판 주문 시 1판 무료 (비싼 애 X)&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;비회원 &amp;gt; 그냥 맛있게 드세요~&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;피자 관리 시스템&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;&amp;nbsp;- 메뉴 추가하기&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;-&amp;nbsp; 피자 사이즈, 빵끝, 토핑 추가&amp;nbsp;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;&amp;nbsp;- 메뉴 수정하기&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;피자 주문 확인&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;-&amp;nbsp;&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;매출 확인&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;- 누적 판매량 확인&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;-&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;일일 매출 확인&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: justify; font-size: 20px;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="29" y="106" width="653" height="251" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
