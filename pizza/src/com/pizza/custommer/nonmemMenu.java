@@ -10,22 +10,22 @@ public class nonmemMenu implements AppService {
 	
 	@Override
 	public void start() {
-		while(true) {
+		Loop:while(true) {
 		nonmemMenu();
 		int sel = inputInteger();
 			
 		switch (sel) {
 		case 1:
 			beforeJoin();
-			break;
+			break Loop;
 		case 2:
 			join(); //주문으로 나중에 수정
-			break;
+			break Loop;
 		default:
-			System.out.println("정확하게 입력해주세요.");
+			System.out.println("\n정확하게 다시 입력해주세요.\n>>> ");
+			System.out.println();
+			sel = inputInteger();
 		}
-		System.out.println("\n-------------계속 진행하시려면 ENTER를 누르세요--------------");
-		inputString();
 		}
 	}
 
@@ -38,24 +38,24 @@ public class nonmemMenu implements AppService {
 		System.out.println("회원가입을 진행하시겠습니까? (Y/N)");
 		System.out.print(">>> ");
 		String answer = inputString().toUpperCase();
-		System.out.println();
+		
 	
 
-		switch (answer.toUpperCase()) {
-		case "Y": case "ㅛ":
-			join();
-			break;
-		case "N": case "ㅜ":
-
-			System.out.println("전 화면으로 돌아갑니다.");
-			nonmemMenu();
-			break;
-		default:
-			System.out.println("정확하게 입력해주세요.");
+		Loop: while(true) {
+			switch (answer.toUpperCase()) {
+			case "Y": case "ㅛ":
+				join();
+				break Loop;
+			case "N": case "ㅜ":
+				System.out.println("\n처음 화면으로 돌아갑니다.\n");
+				break Loop;
+			default:
+				System.out.print("\n정확하게 다시 입력해주세요.\n>>> ");
+				answer = inputString().toUpperCase();
+		}
 		}
 
-		System.out.println("\n-------------계속 진행하시려면 ENTER를 누르세요--------------");
-		inputString();
+		
 	}
 
 
@@ -69,34 +69,34 @@ public class nonmemMenu implements AppService {
 		
 		String birthDay;
 		
-		while(true) {
+		Loop: while(true) {
 			System.out.print("생일 (MMNN) : ");
 			birthDay = inputString();
 			
 			if(birthDay.length() != 4) { 										// 길이로 맞게 보내주셨는지 판단하기
 				System.out.println("\n생일을 월과 일만 정확하게 입력해주세요.");
-			} else if(birthDay.charAt(0) != '0' || birthDay.charAt(0) != '1') { // 첫 번째 숫자로 올바른 월 확인하기
+			} else if((birthDay.charAt(0) != '0' && birthDay.charAt(0) != '1') 
+					|| birthDay.charAt(0) == '1' && Character.getNumericValue(birthDay.charAt(1)) > 2) { // 첫 번째 두 번째 숫자로 올바른 월 확인하기
 				System.out.println("\n유효한 월을 입력해주세요. [01 ~ 12]");
-			} else if(birthDay.charAt(2) > '3') {								// 세 번째 숫자로 올바른 날짜 확인하기
+			} else if(Character.getNumericValue(birthDay.charAt(2)) > 3 
+					|| birthDay.charAt(2) == '3' 
+					&& Character.getNumericValue(birthDay.charAt(3)) > 1){	// 세 번째 네번 째 숫자로 올바른 날짜 확인하기
 				System.out.println("\n유효한 날짜를 입력해주세요. [01 ~ 31]");
 			} else {
-				break;
+				break Loop;
 			}
-			
 		}
 		
-			System.out.println(); 
-			System.out.println("전화번호 (01X-XXXX-XXXX)");
-			System.out.print(">>> "); 
-			String phone = inputString();
+		System.out.println(); 
+		System.out.print("전화번호 (01X-XXXX-XXXX) : "); 
+		String phone = inputString();
 		if(phone.length()!=13) {
 			System.out.println("정확하게 입력해주세요.");
 			System.out.print(">>> "); 
 			phone = inputString();  //전화번호 로직 부족한 것 같다
 			
 		} System.out.println(); 
-			System.out.println("집 주소");
-			System.out.print(">>> "); 
+			System.out.print("집 주소 : "); 
 			String address = inputString();
 			System.out.println(); 
 			

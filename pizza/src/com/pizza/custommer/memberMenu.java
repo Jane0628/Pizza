@@ -26,7 +26,7 @@ public class memberMenu implements AppService {
 				deleteUser();
 				break Loop;
 			default:
-				System.out.println("정확하게 입력해주세요.");
+				System.out.print("정확하게 다시 입력해주세요.\n>>> ");
 				sel = inputInteger();
 		}
 		
