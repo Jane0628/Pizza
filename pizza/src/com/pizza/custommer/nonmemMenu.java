@@ -42,10 +42,10 @@ public class nonmemMenu implements AppService {
 	
 
 		switch (answer.toUpperCase()) {
-		case "Y" , "ㅛ":
+		case "Y":
 			join();
 			break;
-		case "N" , "ㅜ":
+		case "N":
 			System.out.println("전 화면으로 돌아갑니다.");
 			nonmemMenu();
 			break;
