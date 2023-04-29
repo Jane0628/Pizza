@@ -54,7 +54,7 @@ public class AppUI {
 		
 		// 회원인지 비회원인지 확인
 		public static void customerMenu() {
-	        System.out.println("\n------------------------ 손님 메뉴 ------------------------");
+	        System.out.println("\n----------------------- 손님 메뉴 -----------------------");
 	        System.out.println(" 1. 회원");
 	        System.out.println(" 2. 비회원");
 	        System.out.println("---------------------------------------------------------");

@@ -25,7 +25,7 @@ public class memberMenu implements AppService {
 //		}
 //		System.out.println("\n====== 계속 진행하시려면 ENTER를 누르세요 ======");
 //		inputString();
-//	}
+	}
 }
 
 
