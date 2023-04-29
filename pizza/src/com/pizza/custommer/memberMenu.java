@@ -17,14 +17,14 @@ public class memberMenu implements AppService {
 	public void start() {
 		memberMenu();
 		int sel = inputInteger();
-		while(true) {
+		Loop: while(true) {
 		switch (sel) {
 			case 1:
-				searchUser();
-				break;
+				showSearchResult();
+				break Loop;
 			case 2:
 				deleteUser();
-				break;
+				break Loop;
 			default:
 				System.out.println("정확하게 입력해주세요.");
 				sel = inputInteger();
@@ -61,6 +61,7 @@ public class memberMenu implements AppService {
 		}
 	} else {
 		System.out.println("\n조회 결과가 없습니다.");
+		System.out.println("처음 화면으로 이동합니다.\n");
 		
 		
 	}
