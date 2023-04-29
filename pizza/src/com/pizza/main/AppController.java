@@ -1,8 +1,9 @@
 package com.pizza.main;
 
 import com.pizza.check.checkBoss;
+import com.pizza.check.checkMember;
 import com.pizza.common.AppService;
-import com.pizza.view.AppUI;
+
 
 public class AppController {
 
@@ -16,7 +17,7 @@ public class AppController {
 			service = new checkBoss();
 			break;
 		case 2:
-			AppUI.customerMenu();
+			service = new checkMember();
 			break;
 			
 		default:
@@ -27,7 +28,7 @@ public class AppController {
 		
 	}
 	
-	// 진짜 사장이 맞는지 구분하기
-	
-
 }
+		
+
+

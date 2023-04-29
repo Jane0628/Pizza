@@ -22,7 +22,7 @@ public class checkBoss implements AppService {
 			System.out.println("메인 화면으로 돌아갑니다.\n");
 			return;
 		}
-		
+
 		service.start();
 	}
 }

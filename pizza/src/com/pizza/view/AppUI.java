@@ -52,16 +52,36 @@ public class AppUI {
 			System.out.print(">>> ");
 		}
 		
-		// 대여 주문 관리 시스템 화면 출력
+		// 회원인지 비회원인지 확인
 		public static void customerMenu() {
-	        System.out.println("\n----------------------- 손님 메뉴 -----------------------");
-	        System.out.println(" 1.");
-	        System.out.println(" 2.");
-	        System.out.println(" 3.");
+	        System.out.println("\n------------------------ 손님 메뉴 ------------------------");
+	        System.out.println(" 1. 회원");
+	        System.out.println(" 2. 비회원");
 	        System.out.println("---------------------------------------------------------");
+	        System.out.println("해당되는 번호를 입력해주시기 바랍니다.");
 	        System.out.print(">>> ");
 	    }
 		
+		//회원일때 메뉴 출력
+		public static void memberMenu() {
+			System.out.println("\n----------------------- 회원 메뉴 -----------------------");
+			System.out.println("1. 회원 정보 수정");
+			System.out.println("2. 회원 탈퇴");
+			System.out.println("3. 주문하기");
+			System.out.println("---------------------------------------------------------");
+			System.out.println("진행하고 싶으신 메뉴의 번호를 입력해주시기 바랍니다.");
+			System.out.print(">>> ");
+		}
+		
+		//비회원일때 메뉴 출력
+		public static void nonmemMenu() {
+			System.out.println("\n----------------------- 비회원 메뉴 ----------------------");
+			System.out.println("1. 회원가입");
+			System.out.println("2. 주문하기");
+			System.out.println("---------------------------------------------------------");
+			System.out.println("진행하고 싶으신 메뉴의 번호를 입력해주시기 바랍니다.");
+			System.out.print(">>> ");
+		}
 
-	}
+}
 
