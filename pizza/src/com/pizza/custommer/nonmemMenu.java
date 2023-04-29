@@ -4,9 +4,15 @@ import com.pizza.common.AppService;
 
 import static com.pizza.view.AppUI.*;
 
+import com.java.user.domain.Grade;
 import com.pizza.user.domain.User;
+import com.pizza.user.repository.UserRepository;
+import com.pizza.user.repository.UserRepositoryImpl;
 
 public class nonmemMenu implements AppService {
+	private final UserRepository userRepository = new UserRepositoryImpl(); //??????
+	
+	
 	
 	@Override
 	public void start() {
@@ -90,12 +96,16 @@ public class nonmemMenu implements AppService {
 		System.out.println(); 
 		System.out.print("전화번호 (01X-XXXX-XXXX) : "); 
 		String phone = inputString();
-		if(phone.length()!=13) {
-			System.out.println("정확하게 입력해주세요.");
-			System.out.print(">>> "); 
-			phone = inputString();  //전화번호 로직 부족한 것 같다
 			
-		} System.out.println(); 
+			while((!((phone.length()==13) && (phone.charAt(3) == '-') && (phone.charAt(8)== '-')))) {
+				System.out.println("\n'-'를 포함한 13자리의 형태로 입력해주세요.");
+				System.out.print("전화번호 (01X-XXXX-XXXX) : "); 
+				phone = inputString();
+			}
+			
+			  //전화번호 중복체크..?
+		 
+		System.out.println(); 
 			System.out.print("집 주소 : "); 
 			String address = inputString();
 			System.out.println(); 
@@ -106,11 +116,12 @@ public class nonmemMenu implements AppService {
 			user.setPhoneNumber(phone);
 			user.setAddress(address);
 			
-//			userRepository.addUser(user); 여기서부터 다시
-		
-			System.out.println("-------------------- 회원가입 완료 --------------------");
-			System.out.println("\n----------------- 회원 메뉴로 이동합니다 -----------------");
-			memberMenu();
+			
+//			userRepository.addUser(user);????
+
+			System.out.println("감사합니다, 회원가입이 완료되었습니다.");
+			System.out.println("처음으로 이동합니다.\n");
+			return;
 	}
 		
 			
