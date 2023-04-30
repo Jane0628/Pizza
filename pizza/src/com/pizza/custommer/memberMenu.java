@@ -34,7 +34,7 @@ public class memberMenu implements AppService {
 		
 	}
 
-	//회원 이름으로 검색 
+	// 회원 이름으로 검색 
 	private List<User> searchUser() {
 	System.out.print("\n회원명 : ");
 	String name = inputString();
@@ -42,7 +42,7 @@ public class memberMenu implements AppService {
 	}
 	
 
-	//회원 탈퇴
+	// 회원 탈퇴
 		private void deleteUser() {
 		if(showSearchResult() > 0) {
 			System.out.print("\n회원명 : ");
@@ -51,7 +51,7 @@ public class memberMenu implements AppService {
 		}
 		}
 	
-	//검색 결과 출력
+	// 검색 결과 출력
 	private int showSearchResult() {
 	List<User> users = searchUser();
 	if(!users.isEmpty()) {
