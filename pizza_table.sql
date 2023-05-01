@@ -2,6 +2,7 @@
 -- 회원 테이블 생성 
 CREATE TABLE pizza_members (
     member_no NUMBER(2),
+    member_name VARCHAR2(10) NOT NULL,
     b_day DATE NOT NULL,
     address VARCHAR2(100) NOT NULL,
     phone_no VARCHAR2(13) NOT NULL,
@@ -29,7 +30,6 @@ CREATE TABLE non_pizza_members (
 CREATE TABLE menu (
     menu_no NUMBER(2),
     menu_name VARCHAR2(15) NOT NULL,
-    pizza_size VARCHAR2(2) NOT NULL,
     price NUMBER(5) NOT NULL
 );
 
@@ -40,7 +40,8 @@ CREATE SEQUENCE menu_seq
     MAXVALUE 99
     NOCYCLE
     NOCACHE;
-    
+
+SELECT * FROM menu;
 --------------------------------------------------------------------------------
 
 -- 주문 테이블 생성

@@ -29,7 +29,9 @@ public class BossMenu implements AppService {
 				break;
 			}
 			
-			service.start();
+			if(service != null) {
+				service.start();				
+			}
 			
 		}
 			

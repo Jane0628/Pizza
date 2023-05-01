@@ -2,10 +2,14 @@ package com.pizza.user.repository;
 
 
 	import java.sql.Connection;
-	import java.sql.PreparedStatement;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 	import java.sql.ResultSet;
 	import java.sql.SQLException;
-	import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 	import java.util.List;
 
 	import com.pizza.common.DataBaseConnection;
@@ -21,8 +25,8 @@ package com.pizza.user.repository;
 		public void addUser(User user) {
 			System.out.println("repository: " + user);
 			String sql = "INSERT INTO pizza_members "
-			
-					+ "VALUES(users_seq.NEXTVAL,?,?,?,?)";
+					+ "(member_no, member_name, b_day, address, phone_no)"
+					+ "VALUES(pizza_mem_seq.NEXTVAL,?,?,?,?)";
 			
 			/*
 			 # try with Resources
@@ -33,8 +37,14 @@ package com.pizza.user.repository;
 			 */
 			try(Connection conn = connection.getConnection();
 					PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				
+//				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyMMdd");
+//				LocalDateTime ldt = LocalDateTime.parse(user.getBirthDay(), dtf);
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("MMdd");	
+				
 				pstmt.setString(1, user.getUserName());
-			    pstmt.setString(2, user.getBirthDay());
+			    pstmt.setDate(2, new java.sql.Date(sdf.parse(user.getBirthDay()).getTime()));
 				pstmt.setString(3, user.getPhoneNumber());
 				pstmt.setString(4, user.getAddress());
 				
@@ -60,11 +70,11 @@ package com.pizza.user.repository;
 				
 				while(rs.next()) {
 					User user = new User(
-								rs.getInt("userNumber"),
-								rs.getString("userName"),
-								rs.getString("birthDay"),
-								rs.getString("phoneNumber"),
-								rs.getString("address")
+								rs.getInt("member_no"),
+								rs.getString("member_name"),
+								rs.getString("b_day"),
+								rs.getString("address"),
+								rs.getString("phone_no")
 								
 							);
 					userList.add(user);

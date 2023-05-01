@@ -1,19 +1,17 @@
-package com.pizza.pizza.domain;
+package com.pizza.menu.domain;
 
-public class PizzaMenu {
+public class Menu {
 
 	private int menuNo;
 	private String menuName;
-	private Size pizzaSize;
 	private int price;
 	
-	public PizzaMenu() {}
+	public Menu() {}
 
-	public PizzaMenu(int menuNo, String menuName, Size pizzaSize, int price) {
+	public Menu(int menuNo, String menuName, int price) {
 		super();
 		this.menuNo = menuNo;
 		this.menuName = menuName;
-		this.pizzaSize = pizzaSize;
 		this.price = price;
 	}
 
@@ -33,14 +31,6 @@ public class PizzaMenu {
 		this.menuName = menuName;
 	}
 
-	public Size getPizzaSize() {
-		return pizzaSize;
-	}
-
-	public void setPizzaSize(Size pizzaSize) {
-		this.pizzaSize = pizzaSize;
-	}
-
 	public int getPrice() {
 		return price;
 	}
@@ -53,7 +43,6 @@ public class PizzaMenu {
 	public String toString() {
 		return " 메뉴 번호 : " + menuNo +
 			   ", 메뉴명 : " + menuName +
-			   ", 사이즈 : " + pizzaSize +
 			   ", 가격 : " + price;
 	}
 	

@@ -9,8 +9,6 @@ import com.pizza.user.domain.User;
 import com.pizza.user.repository.UserRepository;
 
 
-
-
 public class NonMemMenu implements AppService {
 	private final UserRepository userRepository = new UserRepository();
 	private static AppService service;
@@ -48,7 +46,6 @@ public class NonMemMenu implements AppService {
 		System.out.println("회원가입을 진행하시겠습니까? (Y/N)");
 		System.out.print(">>> ");
 		String answer = inputString().toUpperCase();
-
 		Loop: while(true) {
 			switch (answer.toUpperCase()) {
 			case "Y": case "ㅛ":
