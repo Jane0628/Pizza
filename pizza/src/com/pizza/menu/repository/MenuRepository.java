@@ -2,6 +2,9 @@ package com.pizza.menu.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.pizza.common.DataBaseConnection;
 import com.pizza.menu.domain.Menu;
@@ -46,8 +49,34 @@ public class MenuRepository {
 	
 	
 	// 가격 수정하기
-	public void updatePrice() {
+	public void updatePrice(String menu) {
 		
+	}
+	
+	// 전체 조회하기
+	public List<Menu> viewTable(String keyword) {
+		String sql = "SELECT * FROM menu "
+				   + "WHERE menu_name LIKE '%" + keyword + "%' "
+			   	   + "ORDER BY menu_no";
+		
+		List<Menu> menuList = new ArrayList<>();
+		
+		try(Connection conn = connection.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery()) {
+				
+			while(rs.next()) {
+				Menu menu = new Menu(rs.getString("menu_no"),
+									 rs.getString("menu_name"),
+									 rs.getInt("price"));
+				menuList.add(menu);
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return menuList;
 	}
 
 }

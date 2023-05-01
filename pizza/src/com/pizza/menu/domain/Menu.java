@@ -2,24 +2,24 @@ package com.pizza.menu.domain;
 
 public class Menu {
 
-	private int menuNo;
+	private String menuNo;
 	private String menuName;
 	private int price;
 	
 	public Menu() {}
 
-	public Menu(int menuNo, String menuName, int price) {
+	public Menu(String menuNo, String menuName, int price) {
 		super();
 		this.menuNo = menuNo;
 		this.menuName = menuName;
 		this.price = price;
 	}
 
-	public int getMenuNo() {
+	public String getMenuNo() {
 		return menuNo;
 	}
 
-	public void setMenuNo(int menuNo) {
+	public void setMenuNo(String menuNo) {
 		this.menuNo = menuNo;
 	}
 
@@ -44,8 +44,6 @@ public class Menu {
 		return " 메뉴 번호 : " + menuNo +
 			   ", 메뉴명 : " + menuName +
 			   ", 가격 : " + price;
-	}
-	
-	
+	}	
 	
 }
