@@ -1,5 +1,4 @@
 package com.pizza.user.domain;
-
 public class User {
 
 	private int userNumber;
@@ -10,9 +9,9 @@ public class User {
 	
 	public User() {}
 
-	public User(int userNumber, String userName, String birthDay, String phoneNumber, String address) {
+	public User(int member_no, String userName, String birthDay, String phoneNumber, String address) {
 		super();
-		this.userNumber = userNumber;
+		this.userNumber = member_no;
 		this.userName = userName;
 		this.birthDay = birthDay;
 		this.phoneNumber = phoneNumber;
@@ -59,13 +58,34 @@ public class User {
 		this.address = address;
 	}
 	
+	
+	  public String secretPhone(String phoneNumber) {
+	        String answer = "";
+	        String[] num = phoneNumber.split("");
+	        
+	        int len = num.length;
+	        
+	        for(int i = 0; i < len; i++) {
+	            if(i < len - 4) 
+	                answer += "*";
+	            else
+	                answer += num[i];
+	        }
+	        
+	        return answer;
+	
+		}
+	  
+
+	   
+	
 	@Override
     public String toString() {
-        return  "## 회원번호: " + userNumber +
+        return  "회원번호: " + userNumber +  //추가할때 회원번호 왜 0으로 뜨는지 모르겠다
                         ", 회원명: " + userName +
                         ", 생일: " + birthDay +
-                        ", 전화번호: " + phoneNumber  +
-                        ", 집 주소: " + address;
+                        ", 전화번호: " + secretPhone(phoneNumber) +
+                        ", 주소: " + address.replaceAll("(?<=.{9}).", "*");
                        
     }
 	
