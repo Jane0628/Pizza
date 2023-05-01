@@ -20,7 +20,6 @@ public class checkMember implements AppService {
 		if(sel == 1) {
 			service = new memberMenu();
 		} else if(sel == 2) {
-			new nonmemMenu();
 			service = nonmemMenu.beforeJoin();
 		} else {
 			System.out.println("\n잘못된 번호를 입력하셨습니다.");

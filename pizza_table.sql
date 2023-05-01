@@ -29,7 +29,6 @@ CREATE TABLE non_pizza_members (
 CREATE TABLE menu (
     menu_no NUMBER(2),
     menu_name VARCHAR2(15) NOT NULL,
-    pizza_size VARCHAR2(2) NOT NULL,
     price NUMBER(5) NOT NULL
 );
 

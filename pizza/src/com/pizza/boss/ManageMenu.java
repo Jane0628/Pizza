@@ -39,5 +39,7 @@ public class ManageMenu implements AppService{
 		
 		System.out.print("가격 : ");
 		int price = inputInteger();
+		
+		System.out.println();
 	}
 }
