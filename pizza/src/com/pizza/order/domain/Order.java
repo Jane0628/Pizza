@@ -1,47 +1,45 @@
 package com.pizza.order.domain;
 
-public class Order {
-	/*
-	 CREATE TABLE order_history (
-	    order_no NUMBER(5) PRIMARY KEY,
-	    user_number NUMBER(5) NOT NULL,
-	    serial_number NUMBER(5) NOT NULL,
-	    order_date DATE DEFAULT sysdate,
-	    return_date DATE DEFAULT sysdate + 3
-	);
+import java.time.LocalDate;
+import java.util.List;
 
-	CREATE SEQUENCE order_seq
-	    START WITH 1
-	    INCREMENT BY 1
-	    MAXVALUE 100000
-	    NOCYCLE
-	    NOCACHE;
-	 */
+import com.pizza.menu.domain.Menu; //??맞는지 모르겠다
+
+public class Order {
+	
+		private int orderNumber;
+		private int userNumber;
+		private LocalDate orderDateraw;
+		private List<Menu> menuList;  //?? 맞는지 모르겠다
+		private int totalPrice;
+		
+		int m = orderDateraw.getMonthValue();
+        int d = orderDateraw.getDayOfMonth();
+        
+        String mm = String.format("%02d", m);
+        String dd = String.format("%02d", d);
+        String orderDate = mm+dd;
 
 		
-		private int orderNo;
-		private int userNumber;
-		private int serialNumber;
-		private LocalDateTime orderDate;
-		private LocalDateTime returnDate;
+     
 		
 		public Order() {}
 
-		public Order(int orderNo, int userNumber, int serialNumber, LocalDateTime orderDate, LocalDateTime returnDate) {
+		public Order(int orderNumber, int userNumber, String orderDate, List<Menu> menuList, int totalPrice) {
 			super();
-			this.orderNo = orderNo;
+			this.orderNumber = orderNumber;
 			this.userNumber = userNumber;
-			this.serialNumber = serialNumber;
 			this.orderDate = orderDate;
-			this.returnDate = returnDate;
+			this.menuList = menuList;
+			this.totalPrice = totalPrice;
 		}
 
-		public int getOrderNo() {
-			return orderNo;
+		public int getOrderNumber() {
+			return orderNumber;
 		}
 
-		public void setOrderNo(int orderNo) {
-			this.orderNo = orderNo;
+		public void setOrderNumber(int orderNumber) {
+			this.orderNumber = orderNumber;
 		}
 
 		public int getUserNumber() {
@@ -52,30 +50,30 @@ public class Order {
 			this.userNumber = userNumber;
 		}
 
-		public int getSerialNumber() {
-			return serialNumber;
-		}
-
-		public void setSerialNumber(int serialNumber) {
-			this.serialNumber = serialNumber;
-		}
-
-		public LocalDateTime getOrderDate() {
+		public String getOrderDate() {
 			return orderDate;
 		}
 
-		public void setOrderDate(LocalDateTime orderDate) {
+		public void setOrderDate(String orderDate) {
 			this.orderDate = orderDate;
 		}
 
-		public LocalDateTime getReturnDate() {
-			return returnDate;
+		public List<Menu> getMenuList() {
+			return menuList;
 		}
 
-		public void setReturnDate(LocalDateTime returnDate) {
-			this.returnDate = returnDate;
+		public void setMenuList(List<Menu> menuList) {
+			this.menuList = menuList;
 		}
-		
-		
 
+		public int getTotalPrice() {
+			return totalPrice;
+		}
+
+		public void setTotalPrice(int totalPrice) {
+			this.totalPrice = totalPrice;
+		}
+
+		
 	}
+

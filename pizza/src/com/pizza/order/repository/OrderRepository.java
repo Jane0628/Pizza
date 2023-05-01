@@ -1,29 +1,29 @@
 package com.pizza.order.repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.List;
+
+import com.pizza.common.DataBaseConnection;
+import com.pizza.order.domain.Order;
+
 public class OrderRepository {
 
-	package com.java.order.repository;
-
-	import java.sql.Connection;
-	import java.sql.PreparedStatement;
-	import java.sql.SQLException;
-
-	import com.java.common.DataBaseConnection;
-
-	public class OrderRepository {
-		
 		private DataBaseConnection connection 
 				= DataBaseConnection.getInstance();
 
-		public void addOrder(int movieNumber, int userNumber) {
-			String sql = "INSERT INTO order_history "
-					+ "(order_no, user_number, serial_number) "
-					+ "VALUES(order_seq.NEXTVAL,?,?)";
+		public void addOrder(Order order) {
+			System.out.println(order);
+			String sql = "INSERT INTO pizza_order "
+					+ "(order_no, order_date, member_no, total_price) "
+					+ "VALUES(order_seq.NEXTVAL,?,?,?,?)";
 			
 			try(Connection conn = connection.getConnection();
 					PreparedStatement pstmt = conn.prepareStatement(sql)) {
-				pstmt.setInt(1, userNumber);
-				pstmt.setInt(2, movieNumber);
+				pstmt.setString(1, order.getOrderDate());  //??? 모르겠다
+				pstmt.setInt(2, order.getUserNumber());
+//				pstmt.setString(3, menuList); //????모르겠다
+				pstmt.setInt(3, order.getTotalPrice());
 				if(pstmt.executeUpdate() == 1) {
 					System.out.println("주문이 성공적으로 이루어졌습니다.");
 				} else {
@@ -35,21 +35,7 @@ public class OrderRepository {
 			}
 			
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
-		
+				
 		
 	}
 
-}
