@@ -6,7 +6,7 @@ import com.pizza.boss.BossMenu;
 import static com.pizza.view.AppUI.*;
 
 
-public class checkBoss implements AppService {
+public class CheckBoss implements AppService {
 	
 	private AppService service;
 	

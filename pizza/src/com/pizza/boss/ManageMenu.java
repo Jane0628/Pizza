@@ -17,14 +17,15 @@ public class ManageMenu implements AppService{
 			int selection = inputInteger();
 			
 			switch (selection) {
-			case 1: {
+			case 1: { // 메뉴 추가하기
 				add();
 				break;
 			}
-			case 2: {
+			case 2: { // 메뉴 가격 수정하기
+				updatePrice();
 				break;
 			}
-			case 3: {
+			case 3: { // 메뉴 삭제하기
 				break;
 			}
 			default:
@@ -66,4 +67,34 @@ public class ManageMenu implements AppService{
 		
 		menuRepository.addMenu(newMenu, side);
 	}
+	
+	// 메뉴 가격 수정하기
+	private void updatePrice() {
+		System.out.println("\n------------------*** 가격 수정하기 ***------------------");		
+		System.out.print("메뉴명 : ");
+		String menuName = inputString();
+		
+		System.out.print("가격 : ");
+		int price = inputInteger();
+		
+		String side;
+		while(true) {
+			System.out.println("사이드 메뉴인가요? [Y / N]");
+			System.out.print(">>> ");
+			side = inputString().toUpperCase();
+			
+			if(side.equals("Y") || side.equals("N") || side.equals("ㅛ") || side.equals("ㅜ")) {
+				break;
+			} else {
+				System.out.println("\n올바른 값으로 입력해주세요.\n");
+			}
+		}
+		
+		Menu newMenu = new Menu();
+		newMenu.setMenuName(menuName);
+		newMenu.setPrice(price);
+		
+		menuRepository.addMenu(newMenu, side);
+	}
+	
 }

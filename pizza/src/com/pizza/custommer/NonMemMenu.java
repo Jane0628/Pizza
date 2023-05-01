@@ -1,19 +1,25 @@
 package com.pizza.custommer;
 
+import static com.pizza.view.AppUI.inputInteger;
+import static com.pizza.view.AppUI.inputString;
+import static com.pizza.view.AppUI.nonmemMenu;
+
 import com.pizza.common.AppService;
+<<<<<<< HEAD
 
 import static com.pizza.view.AppUI.*;
 
 
+=======
+>>>>>>> 2c96d3dcf77e5a2d34f830a4881e2424ca7c2d25
 import com.pizza.user.domain.User;
 import com.pizza.user.repository.UserRepository;
+
 
 
 public class NonMemMenu implements AppService {
 	private final UserRepository userRepository = new UserRepository();
 	private static AppService service;
-
-
 
 	@Override
 	public void start() {

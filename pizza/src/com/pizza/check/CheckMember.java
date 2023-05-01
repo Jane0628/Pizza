@@ -7,7 +7,7 @@ import com.pizza.common.AppService;
 import com.pizza.custommer.MemberMenu;
 import com.pizza.custommer.NonMemMenu;
 
-public class checkMember implements AppService {
+public class CheckMember implements AppService {
 
 
 	private AppService service;
