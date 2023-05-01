@@ -20,14 +20,15 @@ public class MemberMenu implements AppService {
 		Loop: while(true) {
 		switch (sel) {
 			case 1:
-				showSearchResult();
+				changeUser();
+				
 				break Loop;
 			case 2:
 				deleteUser();
 				break Loop;
 			default:
 				System.out.print("정확하게 다시 입력해주세요.\n>>> ");
-				sel = inputInteger();
+				
 		}
 		
 		}
@@ -41,11 +42,22 @@ public class MemberMenu implements AppService {
 	return userRepository.findByUserName(name);
 	}
 	
+	//회원 정보 수정
+	private void changeUser() {
+		if(showSearchResult() > 0) {
+			System.out.print("회원님의 번호를 입력해주세요.\n>>> ");
+			int cUserNum = inputInteger();
+			userRepository.changeUser(cUserNum);
+			
+		}
+		
+	}
+	
 
 	// 회원 탈퇴
 		private void deleteUser() {
 		if(showSearchResult() > 0) {
-			System.out.print("\n회원명 : ");
+			System.out.print("\n회원님의 번호를 입력해주세요.\n>>> ");
 			int delUserNum = inputInteger();
 			userRepository.deleteUser(delUserNum);
 		}
@@ -55,7 +67,7 @@ public class MemberMenu implements AppService {
 	private int showSearchResult() {
 	List<User> users = searchUser();
 	if(!users.isEmpty()) {
-		System.out.println("\n----------------- 회원 조회 결과 --------------------");
+		System.out.println("\n---------------------- 회원 조회 결과 --------------------------");
 		for(User user : users) {
 			System.out.println(user);
 		}

@@ -1,21 +1,22 @@
 package com.pizza.user.repository;
 
 
-	import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-	import java.sql.ResultSet;
-	import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-	import java.util.List;
+import static com.pizza.view.AppUI.inputInteger;
+import static com.pizza.view.AppUI.inputString;
 
-	import com.pizza.common.DataBaseConnection;
-	import com.pizza.user.domain.User;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.pizza.common.DataBaseConnection;
+import com.pizza.user.domain.User;
 
 	public class UserRepository {
+		
+
 		
 		//커넥션 객체 받아오기
 		private DataBaseConnection connection = 
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 			
 		//회원 추가
 		public void addUser(User user) {
-			System.out.println("repository: " + user);
+			System.out.println(user);
 			String sql = "INSERT INTO pizza_members "
 					+ "(member_no, member_name, b_day, address, phone_no)"
 					+ "VALUES(pizza_mem_seq.NEXTVAL,?,?,?,?)";
@@ -38,18 +39,13 @@ import java.util.ArrayList;
 			try(Connection conn = connection.getConnection();
 					PreparedStatement pstmt = conn.prepareStatement(sql)) {
 				
-//				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyMMdd");
-//				LocalDateTime ldt = LocalDateTime.parse(user.getBirthDay(), dtf);
-				
-				SimpleDateFormat sdf = new SimpleDateFormat("MMdd");	
-				
 				pstmt.setString(1, user.getUserName());
-			    pstmt.setDate(2, new java.sql.Date(sdf.parse(user.getBirthDay()).getTime()));
-				pstmt.setString(3, user.getPhoneNumber());
-				pstmt.setString(4, user.getAddress());
+			    pstmt.setString(2, user.getBirthDay());
+				pstmt.setString(3, user.getAddress());
+				pstmt.setString(4, user.getPhoneNumber());
 				
 				if(pstmt.executeUpdate() == 1) {
-					System.out.println("회원가입이 정상 처리되었습니다.");
+					System.out.println("회원가입이 완료되었습니다.");
 				} else {
 					System.out.println("회원 가입에 실패했습니다. 관리자에게 문의하세요.");
 				}			
@@ -61,7 +57,7 @@ import java.util.ArrayList;
 		//회원의 이름으로 정보 검색
 		public List<User> findByUserName(String userName) {
 			List<User> userList = new ArrayList<>();
-			String sql = "SELECT * FROM users WHERE user_name=?";
+			String sql = "SELECT * FROM pizza_members WHERE member_name=?";
 			
 			try(Connection conn = connection.getConnection();
 					PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -85,17 +81,65 @@ import java.util.ArrayList;
 			}	
 			return userList;
 		}
-
+		
+		//회원번호로 정보 수정하기
+		public void changeUser(int cUserNum) {
+			System.out.println("\n수정하실 정보를 선택해주세요.\n1.전화번호 2.집 주소");
+			int cInfoNum=inputInteger();
+			if(cInfoNum == 1) {
+				System.out.println("새로운 전화번호를 입력해주세요.");
+				String nPN=inputString();
+			String sql = "UPDATE pizza_members SET phone_no=? Where member_no=?";
+			try (Connection conn = connection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+					pstmt.setString(1, nPN);
+					pstmt.setInt(2, cUserNum);
+					
+					if(pstmt.executeUpdate() == 1) {
+						System.out.println("\n전화번호가 정상적으로 수정되었습니다.");
+						return; //회원메뉴로 가고싶다
+						
+					} else {System.out.println("\n검색된 회원번호로만 정보 수정이 가능합니다.");
+					}
+;				}
+					catch (SQLException e) {
+						e.printStackTrace();
+			}
+		} else if(cInfoNum == 2) {
+			System.out.println("새로운 집 주소를 입력해주세요.");
+			String nAddress = inputString();
+			String sql = "UPDATE pizza_members SET address=? Where member_no=?";
+			try (Connection conn = connection.getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(sql)) {
+						pstmt.setString(1, nAddress);
+						pstmt.setInt(2, cUserNum);
+						
+						if(pstmt.executeUpdate() == 1) {
+							System.out.println("\n집 주소가 정상적으로 수정되었습니다.");
+						} else {System.out.println("\n검색된 회원번호로만 정보 수정이 가능합니다.");
+						}
+						System.out.println("처음 메뉴로 돌아갑니다.\n");///????회원메뉴로 돌아가고 싶다
+						return;
+			}
+						catch (SQLException e) {
+							e.printStackTrace();
+				}
+		}
+		}
+		
+		
+		//회원탈퇴
 		public void deleteUser(int delUserNum) {
-			String sql = "DELETE FROM users WHERE user_number=?";
+			String sql = "DELETE FROM pizza_members WHERE member_no=?";
 			try(Connection conn = connection.getConnection();
 					PreparedStatement pstmt = conn.prepareStatement(sql)) {
 							pstmt.setInt(1,  delUserNum);
 					
 					if(pstmt.executeUpdate() == 1) {
-						System.out.println("\n### 회원정보가 정상 삭제되었습니다.");
+						System.out.println("\n회원정보가 정상적으로 삭제되었습니다.");
+						System.out.println("처음으로 돌아갑니다.\n");
 		} else {
-			System.out.println("\n### 검색한 회원의 회원번호로만 삭제가 가능합니다.");
+			System.out.println("\n검색된 회원번호로만 삭제가 가능합니다.");
 		}
 		} catch (SQLException e) {
 			e.printStackTrace();
