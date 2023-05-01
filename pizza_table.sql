@@ -3,10 +3,10 @@
 CREATE TABLE pizza_members (
     member_no NUMBER(2),
     member_name VARCHAR2(10) NOT NULL,
-    b_day DATE NOT NULL,
+    b_day VARCHAR2(4) NOT NULL,
     address VARCHAR2(100) NOT NULL,
     phone_no VARCHAR2(13) NOT NULL,
-    stamp_cnt NUMBER(2)
+    stamp_cnt NUMBER(2) DEFAULT 0
 );
 
 -- 회원 시퀀스 생성
@@ -28,20 +28,33 @@ CREATE TABLE non_pizza_members (
 
 -- 메뉴 테이블 생성
 CREATE TABLE menu (
-    menu_no NUMBER(2),
-    menu_name VARCHAR2(15) NOT NULL,
+    menu_no VARCHAR2(10),
+    menu_name VARCHAR2(100) NOT NULL,
     price NUMBER(5) NOT NULL
 );
 
 -- 메뉴 시퀀스 생성
-CREATE SEQUENCE menu_seq
+CREATE SEQUENCE main_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 99
+    NOCYCLE
+    NOCACHE;
+    
+-- 사이드 시퀀스 생성
+CREATE SEQUENCE side_seq
     START WITH 1
     INCREMENT BY 1
     MAXVALUE 99
     NOCYCLE
     NOCACHE;
 
-SELECT * FROM menu;
+DROP TABLE menu;
+DROP SEQUENCE main_seq;
+DROP SEQUENCE side_seq;
+
+SELECT * FROM menu
+ORDER BY menu_no;
 --------------------------------------------------------------------------------
 
 -- 주문 테이블 생성

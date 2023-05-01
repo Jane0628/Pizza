@@ -1,7 +1,7 @@
 package com.pizza.main;
 
-import com.pizza.check.checkBoss;
-import com.pizza.check.checkMember;
+import com.pizza.check.CheckBoss;
+import com.pizza.check.CheckMember;
 import com.pizza.common.AppService;
 
 
@@ -14,10 +14,10 @@ public class AppController {
 		
 		switch (check) {
 		case 1:
-			service = new checkBoss();
+			service = new CheckBoss();
 			break;
 		case 2:
-			service = new checkMember();
+			service = new CheckMember();
 			break;
 			
 		default:

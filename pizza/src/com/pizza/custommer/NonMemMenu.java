@@ -1,15 +1,15 @@
 package com.pizza.custommer;
 
+import static com.pizza.view.AppUI.inputInteger;
+import static com.pizza.view.AppUI.inputString;
+import static com.pizza.view.AppUI.nonmemMenu;
+
 import com.pizza.common.AppService;
-
-import static com.pizza.view.AppUI.*;
-
-import com.java.user.domain.Grade;
 import com.pizza.user.domain.User;
 import com.pizza.user.repository.UserRepository;
 import com.pizza.user.repository.UserRepositoryImpl;
 
-public class nonmemMenu implements AppService {
+public class NonMemMenu implements AppService {
 	
 	private final UserRepository userRepository = new UserRepositoryImpl(); //?????	
 	

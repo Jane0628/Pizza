@@ -10,7 +10,7 @@ import com.pizza.user.repository.UserRepositoryImpl;
 
 import java.util.List;
 
-public class memberMenu implements AppService {
+public class MemberMenu implements AppService {
 	private final UserRepository userRepository = new UserRepositoryImpl();
 	
 	@Override
