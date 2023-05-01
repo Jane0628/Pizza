@@ -8,12 +8,12 @@ import static com.pizza.view.AppUI.memberMenu;
 import com.pizza.common.AppService;
 import com.pizza.user.domain.User;
 import com.pizza.user.repository.UserRepository;
-
+import com.pizza.check.CheckMember;
 
 
 public class NonMemMenu implements AppService {
 	private final UserRepository userRepository = new UserRepository();
-	private static AppService service;
+
 
 	@Override
 	public void start() {
@@ -74,7 +74,7 @@ public class NonMemMenu implements AppService {
 		String birthDay;
 
 		Loop: while(true) {
-			System.out.print("생일 (MMNN) : ");
+			System.out.print("\n생일 (MMNN) : ");
 			birthDay = inputString();
 
 			if(birthDay.length() != 4) { 										// 길이로 맞게 보내주셨는지 판단하기
@@ -111,16 +111,17 @@ public class NonMemMenu implements AppService {
 		User user = new User();
 		user.setUserName(name);
 		user.setBirthDay(birthDay);
-		user.setPhoneNumber(phone);
 		user.setAddress(address);
+		user.setPhoneNumber(phone);
+		
 
 
 		userRepository.addUser(user);
 
-		System.out.println("감사합니다, 회원가입이 완료되었습니다.");
 		System.out.println("회원 메뉴로 이동합니다.\n");
-		memberMenu();
-		int sel = inputInteger();
+		//????회원메뉴로 이동하고 싶다
+		return;
+		
 		
 		
 		
