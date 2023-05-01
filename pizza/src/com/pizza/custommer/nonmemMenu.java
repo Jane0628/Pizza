@@ -11,13 +11,12 @@ import com.pizza.user.repository.UserRepositoryImpl;
 
 public class nonmemMenu implements AppService {
 	
-	private static AppService service;
-	
 	private final UserRepository userRepository = new UserRepositoryImpl(); //?????	
 	
 	@Override
 	public void start() {
 		Loop:while(true) {
+		beforeJoin();
 		nonmemMenu();
 		int sel = inputInteger();
 			
@@ -37,7 +36,7 @@ public class nonmemMenu implements AppService {
 	}
 
 	//회원가입 전 혜택 공지
-	public static AppService beforeJoin() {
+	public void beforeJoin() {
 		System.out.println("\n--------------------- 회원 가입 시 혜택 ---------------------");
 		System.out.println("1. 생일 당일 주문시 30% 할인!!");
 		System.out.println("2. 스탬프 10개 모으면 피자 한 판 무료!!");
@@ -59,10 +58,6 @@ public class nonmemMenu implements AppService {
 				answer = inputString().toUpperCase();
 			}
 		}
-		
-		service = new nonmemMenu();
-
-		return service;
 	}
 
 
