@@ -58,6 +58,17 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
+	@Override
+    public String toString() {
+        return  "## 회원번호: " + userNumber +
+                        ", 회원명: " + userName +
+                        ", 생일: " + birthDay +
+                        ", 전화번호: " + phoneNumber  +
+                        ", 집 주소: " + address;
+                       
+    }
+	
 }
 	
 

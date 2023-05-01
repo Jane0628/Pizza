@@ -1,17 +1,17 @@
 package com.pizza.custommer;
 
-import com.pizza.common.AppService;
-import com.pizza.user.domain.User;
-
-import static com.pizza.view.AppUI.*;
-import com.pizza.user.repository.UserRepository;
-import com.pizza.user.repository.UserRepositoryImpl;
-
+import static com.pizza.view.AppUI.inputInteger;
+import static com.pizza.view.AppUI.inputString;
+import static com.pizza.view.AppUI.memberMenu;
 
 import java.util.List;
+import com.pizza.common.AppService;
+import com.pizza.user.domain.User;
+import com.pizza.user.repository.UserRepository;
 
 public class MemberMenu implements AppService {
-	private final UserRepository userRepository = new UserRepositoryImpl();
+	private final UserRepository userRepository = new UserRepository();
+
 	
 	@Override
 	public void start() {
