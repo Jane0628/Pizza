@@ -1,10 +1,11 @@
 package com.pizza.check;
 
+import static com.pizza.view.AppUI.customerMenu;
+import static com.pizza.view.AppUI.inputInteger;
+
 import com.pizza.common.AppService;
 import com.pizza.custommer.memberMenu;
 import com.pizza.custommer.nonmemMenu;
-
-import static com.pizza.view.AppUI.*;
 
 public class checkMember implements AppService {
 
@@ -19,7 +20,8 @@ public class checkMember implements AppService {
 		if(sel == 1) {
 			service = new memberMenu();
 		} else if(sel == 2) {
-			service = new nonmemMenu();
+			new nonmemMenu();
+			service = nonmemMenu.beforeJoin();
 		} else {
 			System.out.println("\n잘못된 번호를 입력하셨습니다.");
 			System.out.println("메인 화면으로 돌아갑니다.\n");

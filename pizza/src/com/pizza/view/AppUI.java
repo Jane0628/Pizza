@@ -92,9 +92,9 @@ public class AppUI {
 	//회원일때 메뉴 출력
 	public static void memberMenu() {
 		System.out.println("\n--------------------*** 회원 메뉴 ***--------------------");
-		System.out.println("1. 회원 정보 수정");
-		System.out.println("2. 회원 탈퇴");
-		System.out.println("3. 주문하기");
+		System.out.println(" 1. 회원 정보 수정");
+		System.out.println(" 2. 회원 탈퇴");
+		System.out.println(" 3. 주문하기");
 		System.out.println("---------------------------------------------------------");
 		System.out.println("진행하고 싶으신 메뉴의 번호를 입력해주시기 바랍니다.");
 		System.out.print(">>> ");
@@ -103,8 +103,8 @@ public class AppUI {
 	//비회원일때 메뉴 출력
 	public static void nonmemMenu() {
 		System.out.println("\n--------------------*** 비회원 메뉴 ***------------------");
-		System.out.println("1. 회원가입");
-		System.out.println("2. 주문하기");
+		System.out.println(" 1. 회원가입");
+		System.out.println(" 2. 주문하기");
 		System.out.println("---------------------------------------------------------");
 		System.out.println("진행하고 싶으신 메뉴의 번호를 입력해주시기 바랍니다.");
 		System.out.print(">>> ");
