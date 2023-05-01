@@ -1,24 +1,27 @@
 package com.pizza.order.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import com.pizza.menu.domain.Menu;
 
 public class Order {
 	
 	private int orderNo;
-	private int userNumber;
-	private int serialNumber;
 	private LocalDateTime orderDate;
-	private LocalDateTime returnDate;
+	private int memberNo;
+	private List<Menu> menuList;
+	private int totalPrice;
 
 	public Order() {}
 
-	public Order(int orderNo, int userNumber, int serialNumber, LocalDateTime orderDate, LocalDateTime returnDate) {
+	public Order(int orderNo, LocalDateTime orderDate, int memberNo, List<Menu> menuList, int totalPrice) {
 		super();
 		this.orderNo = orderNo;
-		this.userNumber = userNumber;
-		this.serialNumber = serialNumber;
 		this.orderDate = orderDate;
-		this.returnDate = returnDate;
+		this.memberNo = memberNo;
+		this.menuList = menuList;
+		this.totalPrice = totalPrice;
 	}
 
 	public int getOrderNo() {
@@ -29,22 +32,6 @@ public class Order {
 		this.orderNo = orderNo;
 	}
 
-	public int getUserNumber() {
-		return userNumber;
-	}
-
-	public void setUserNumber(int userNumber) {
-		this.userNumber = userNumber;
-	}
-
-	public int getSerialNumber() {
-		return serialNumber;
-	}
-
-	public void setSerialNumber(int serialNumber) {
-		this.serialNumber = serialNumber;
-	}
-
 	public LocalDateTime getOrderDate() {
 		return orderDate;
 	}
@@ -53,14 +40,29 @@ public class Order {
 		this.orderDate = orderDate;
 	}
 
-	public LocalDateTime getReturnDate() {
-		return returnDate;
+	public int getMemberNo() {
+		return memberNo;
 	}
 
-	public void setReturnDate(LocalDateTime returnDate) {
-		this.returnDate = returnDate;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
-	
-	
+
+	public List<Menu> getMenuList() {
+		return menuList;
+	}
+
+	public void setMenuList(List<Menu> menuList) {
+		this.menuList = menuList;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
 }
 
