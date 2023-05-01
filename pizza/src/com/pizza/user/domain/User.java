@@ -75,14 +75,17 @@ public class User {
 	        return answer;
 	
 		}
+	  
+
+	   
 	
 	@Override
     public String toString() {
-        return  "회원번호: " + userNumber +  //회원번호 왜 0으로 뜨는지 모르겠다
+        return  "회원번호: " + userNumber +  //추가할때 회원번호 왜 0으로 뜨는지 모르겠다
                         ", 회원명: " + userName +
                         ", 생일: " + birthDay +
                         ", 전화번호: " + secretPhone(phoneNumber) +
-                        ", 집 주소: " + address;
+                        ", 주소: " + address.replaceAll("(?<=.{9}).", "*");
                        
     }
 	

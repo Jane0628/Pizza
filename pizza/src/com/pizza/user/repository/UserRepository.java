@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.pizza.common.DataBaseConnection;
 import com.pizza.user.domain.User;
+import com.pizza.view.AppUI;
 
 	public class UserRepository {
 		
@@ -26,7 +27,7 @@ import com.pizza.user.domain.User;
 		public void addUser(User user) {
 			System.out.println(user);
 			String sql = "INSERT INTO pizza_members "
-					+ "(member_no, member_name, b_day, address, phone_no)"
+					+ "(member_no, member_name, b_day, phone_no, address)"
 					+ "VALUES(pizza_mem_seq.NEXTVAL,?,?,?,?)";
 			
 			/*
@@ -41,11 +42,12 @@ import com.pizza.user.domain.User;
 				
 				pstmt.setString(1, user.getUserName());
 			    pstmt.setString(2, user.getBirthDay());
-				pstmt.setString(3, user.getAddress());
-				pstmt.setString(4, user.getPhoneNumber());
+				pstmt.setString(3, user.getPhoneNumber());
+				pstmt.setString(4, user.getAddress());
 				
 				if(pstmt.executeUpdate() == 1) {
-					System.out.println("회원가입이 완료되었습니다.");
+					System.out.println("회원가입이 완료되었습니다."); //회원메뉴로 가고싶다
+					
 				} else {
 					System.out.println("회원 가입에 실패했습니다. 관리자에게 문의하세요.");
 				}			
@@ -69,8 +71,8 @@ import com.pizza.user.domain.User;
 								rs.getInt("member_no"),
 								rs.getString("member_name"),
 								rs.getString("b_day"),
-								rs.getString("address"),
-								rs.getString("phone_no")
+								rs.getString("phone_no"),
+								rs.getString("address")
 								
 							);
 					userList.add(user);
