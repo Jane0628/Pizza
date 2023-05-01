@@ -3,15 +3,9 @@ package com.pizza.custommer;
 import static com.pizza.view.AppUI.inputInteger;
 import static com.pizza.view.AppUI.inputString;
 import static com.pizza.view.AppUI.nonmemMenu;
+import static com.pizza.view.AppUI.memberMenu;
 
 import com.pizza.common.AppService;
-<<<<<<< HEAD
-
-import static com.pizza.view.AppUI.*;
-
-
-=======
->>>>>>> 2c96d3dcf77e5a2d34f830a4881e2424ca7c2d25
 import com.pizza.user.domain.User;
 import com.pizza.user.repository.UserRepository;
 
@@ -124,10 +118,15 @@ public class NonMemMenu implements AppService {
 		userRepository.addUser(user);
 
 		System.out.println("감사합니다, 회원가입이 완료되었습니다.");
-		System.out.println("처음으로 이동합니다.\n");
-		return;
+		System.out.println("회원 메뉴로 이동합니다.\n");
+		memberMenu();
+		int sel = inputInteger();
+		
+		
+		
 	}
 
-
 }
+
+
 
