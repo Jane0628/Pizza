@@ -1,9 +1,10 @@
 package com.pizza.check;
 
-import com.pizza.common.AppService;
-import com.pizza.boss.BossMenu;
+import static com.pizza.view.AppUI.checkRealBoss;
+import static com.pizza.view.AppUI.inputInteger;
 
-import static com.pizza.view.AppUI.*;
+import com.pizza.common.AppService;
+import com.pizza.menu.service.MenuService;
 
 
 public class CheckBoss implements AppService {
@@ -16,7 +17,7 @@ public class CheckBoss implements AppService {
 		int code = inputInteger();
 		
 		if(code == 9999) {
-			service = new BossMenu();
+			service = new MenuService();
 		} else {
 			System.out.println("\n잘못된 코드를 입력하셨습니다.");
 			System.out.println("메인 화면으로 돌아갑니다.\n");

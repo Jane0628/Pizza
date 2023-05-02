@@ -5,7 +5,7 @@ public class Menu {
 	private String menuNo;
 	private String menuName;
 	private int price;
-	
+
 	public Menu() {}
 
 	public Menu(String menuNo, String menuName, int price) {
@@ -41,16 +41,9 @@ public class Menu {
 
 	@Override
 	public String toString() {
-		if(menuName.length() >= 12) {
-			return " # " + menuNo +
-				   ".\t메뉴명 : " + menuName +
-				   "\t 가격 : " + price + "원";
-		} else {
-			return " # " + menuNo +
-				   ".\t메뉴명 : " + menuName +
-				   "\t\t 가격 : " + price + "원";
-		}
-		
+		return " # " + menuNo +
+				".\t메뉴 : " + menuName +
+				"\n\t가격 : " + price + "원";
 	}	
-	
+
 }

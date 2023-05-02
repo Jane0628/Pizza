@@ -149,7 +149,7 @@ public class MemberMenu implements AppService {
 
 	// 검색 결과 출력
 	private int showSearchResult() {
-		List<Member> users = ;
+		List<Member> users;
 		if(!users.isEmpty()) {
 			System.out.println("\n---------------------- 회원 조회 결과 --------------------------");
 			for(Member user : users) {

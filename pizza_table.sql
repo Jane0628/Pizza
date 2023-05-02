@@ -35,7 +35,7 @@ CREATE TABLE menu (
 
 -- 메뉴 시퀀스 생성
 CREATE SEQUENCE main_seq
-    START WITH 1
+    START WITH 6
     INCREMENT BY 1
     MAXVALUE 99
     NOCYCLE
@@ -43,7 +43,7 @@ CREATE SEQUENCE main_seq
     
 -- 사이드 시퀀스 생성
 CREATE SEQUENCE side_seq
-    START WITH 1
+    START WITH 9
     INCREMENT BY 1
     MAXVALUE 99
     NOCYCLE
@@ -53,25 +53,24 @@ DROP TABLE menu;
 DROP SEQUENCE main_seq;
 DROP SEQUENCE side_seq;
 
-SELECT * FROM menu
-ORDER BY menu_no;
+SELECT * FROM menu;
 
 -- 메인 더미 데이터
-INSERT INTO menu VALUES(main_seq.NEXTVAL, '콤비네이션 피자', 20500);
-INSERT INTO menu VALUES(main_seq.NEXTVAL, '불고기 피자', 20500);
-INSERT INTO menu VALUES(main_seq.NEXTVAL, '페페로니 피자', 19500);
-INSERT INTO menu VALUES(main_seq.NEXTVAL, '베이컨체다치즈 피자', 20500);
-INSERT INTO menu VALUES(main_seq.NEXTVAL, '고구마 피자', 22500);
+INSERT INTO menu VALUES('1', '콤비네이션 피자', 20500);
+INSERT INTO menu VALUES('2', '불고기 피자', 20500);
+INSERT INTO menu VALUES('3', '페페로니 피자', 19500);
+INSERT INTO menu VALUES('4', '베이컨체다치즈 피자', 20500);
+INSERT INTO menu VALUES('5', '고구마 피자', 22500);
 
 -- 사이드 더미 데이터
-INSERT INTO menu VALUES('S' || side_seq.NEXTVAL, '떡볶이', 8000);
-INSERT INTO menu VALUES('S' || side_seq.NEXTVAL, '치즈볼', 5500);
-INSERT INTO menu VALUES('S' || side_seq.NEXTVAL, '치즈 오븐 스파게티', 9000);
-INSERT INTO menu VALUES('S' || side_seq.NEXTVAL, '브래드 스틱', 7000);
-INSERT INTO menu VALUES('S' || side_seq.NEXTVAL, '치킨 텐더 [6조각]', 9000);
-INSERT INTO menu VALUES('S' || side_seq.NEXTVAL, '콜라 [1.25L]', 2500);
-INSERT INTO menu VALUES('S' || side_seq.NEXTVAL, '제로 콜라 [1.25L]', 2500);
-INSERT INTO menu VALUES('S' || side_seq.NEXTVAL, '스프라이트 [1.5L]', 2500);
+INSERT INTO menu VALUES('S1', '떡볶이', 8000);
+INSERT INTO menu VALUES('S2', '치즈볼', 5500);
+INSERT INTO menu VALUES('S3', '치즈 오븐 스파게티', 9000);
+INSERT INTO menu VALUES('S4', '브래드 스틱', 7000);
+INSERT INTO menu VALUES('S5', '치킨 텐더 [6조각]', 9000);
+INSERT INTO menu VALUES('S6', '콜라 [1.25L]', 2500);
+INSERT INTO menu VALUES('S7', '제로 콜라 [1.25L]', 2500);
+INSERT INTO menu VALUES('S8', '스프라이트 [1.5L]', 2500);
 
 COMMIT;
 --------------------------------------------------------------------------------

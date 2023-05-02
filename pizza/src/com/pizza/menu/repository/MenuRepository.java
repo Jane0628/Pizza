@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.pizza.common.DataBaseConnection;
+import com.pizza.common.Sort;
 import com.pizza.menu.domain.Menu;
 
 public class MenuRepository {
@@ -49,15 +52,51 @@ public class MenuRepository {
 	
 	
 	// 가격 수정하기
-	public void updatePrice(String menu) {
+	public int updatePrice(Menu menu, int newPrice) {
+		String sql = "UPDATE menu SET price = ? "
+				   + "WHERE menu_no = ?";
+		
+		int a = 0;
+		try(Connection conn = connection.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			
+			pstmt.setInt(1, newPrice);
+			pstmt.setString(2, menu.getMenuNo());
+			
+			a = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(" 오류가 발생했습니다.");
+		}
+		
+		return a;
 		
 	}
 	
-	// 전체 조회하기
-	public List<Menu> viewTable(String keyword) {
+	
+	// 삭제하기
+	public int deleteMenu(Menu menu) {
+		String sql = "DELETE FROM menu "
+				   + "WHERE menu_no = ?";
+		
+		int a = 0;
+		try(Connection conn = connection.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			
+			pstmt.setString(1, menu.getMenuNo());
+			
+			a = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(" 오류가 발생했습니다.");
+		}
+		
+		return a;
+		
+	}
+	
+	// 전메뉴 조회하기
+	public List<Menu> viewWholeMenu() {
 		String sql = "SELECT * FROM menu "
-				   + "WHERE menu_name LIKE '%" + keyword + "%' "
-			   	   + "ORDER BY menu_no";
+				   + "ORDER BY menu_no";
 		
 		List<Menu> menuList = new ArrayList<>();
 		
@@ -75,16 +114,45 @@ public class MenuRepository {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		Collections.sort(menuList, new Sort());
+		
+		return menuList;
+	}
+	
+	// 메뉴 조회하기
+	public List<Menu> viewMenuThroughMenuName(String keyword) {
+		String sql = "SELECT * FROM menu "
+				   + "WHERE menu_name LIKE '%" + keyword + "%' "
+		   		   + "ORDER BY menu_no";
+		
+		List<Menu> menuList = new ArrayList<>();
+		
+		try(Connection conn = connection.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery()) {
+				
+			while(rs.next()) {
+				Menu menu = new Menu(rs.getString("menu_no"),
+									 rs.getString("menu_name"),
+									 rs.getInt("price"));
+				menuList.add(menu);
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		Collections.sort(menuList, new Sort());
 		
 		return menuList;
 	}
 	
 	// 메뉴 번호로 메뉴 조회하기
-	public List<Menu> viewMenu(String keyword) {
+	public List<Menu> viewMenuThroughMenuNo(String keyword) {
 		String sql = "SELECT * FROM menu "
-				   + "WHERE menu_no LIKE '%" + keyword + "%' "
-			   	   + "ORDER BY menu_no";
-		
+				   + "WHERE menu_no = '" + keyword + "' "
+				   + "ORDER BY menu_no";
 		List<Menu> menuList = new ArrayList<>();
 		
 		try(Connection conn = connection.getConnection();
@@ -101,6 +169,8 @@ public class MenuRepository {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		Collections.sort(menuList, new Sort());
 		
 		return menuList;
 	}
