@@ -4,8 +4,8 @@ import static com.pizza.view.AppUI.customerMenu;
 import static com.pizza.view.AppUI.inputInteger;
 
 import com.pizza.common.AppService;
-import com.pizza.custommer.MemberMenu;
-import com.pizza.custommer.NonMemMenu;
+import com.pizza.custommer.controller.MemberMenu;
+import com.pizza.custommer.controller.NonMemMenu;
 
 public class CheckMember implements AppService {
 

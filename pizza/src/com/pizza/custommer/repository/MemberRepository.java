@@ -1,4 +1,4 @@
-package com.pizza.user.repository;
+package com.pizza.custommer.repository;
 
 
 import static com.pizza.view.AppUI.inputInteger;
@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pizza.common.DataBaseConnection;
-import com.pizza.user.domain.User;
+import com.pizza.custommer.domain.Member;
 import com.pizza.view.AppUI;
 
-	public class UserRepository {
+	public class MemberRepository {
 		
 
 		
@@ -24,7 +24,7 @@ import com.pizza.view.AppUI;
 				DataBaseConnection.getInstance();
 			
 		//회원 추가
-		public void addUser(User user) {
+		public void addUser(Member user) {
 			System.out.println(user);
 			String sql = "INSERT INTO pizza_members "
 					+ "(member_no, member_name, b_day, phone_no, address)"
@@ -57,8 +57,8 @@ import com.pizza.view.AppUI;
 		}
 		
 		//회원의 이름으로 정보 검색
-		public List<User> findByUserName(String userName) {
-			List<User> userList = new ArrayList<>();
+		public List<Member> findByUserName(String userName) {
+			List<Member> userList = new ArrayList<>();
 			String sql = "SELECT * FROM pizza_members WHERE member_name=?";
 			
 			try(Connection conn = connection.getConnection();
@@ -67,7 +67,7 @@ import com.pizza.view.AppUI;
 				ResultSet rs = pstmt.executeQuery();
 				
 				while(rs.next()) {
-					User user = new User(
+					Member user = new Member(
 								rs.getInt("member_no"),
 								rs.getString("member_name"),
 								rs.getString("b_day"),

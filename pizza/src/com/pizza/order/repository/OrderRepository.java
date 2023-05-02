@@ -15,15 +15,15 @@ public class OrderRepository {
 		public void addOrder(Order order) {
 			System.out.println(order);
 			String sql = "INSERT INTO pizza_order "
-					+ "(order_no, order_date, member_no, total_price) "
-					+ "VALUES(order_seq.NEXTVAL,?,?,?,?)";
+					   + "(order_no, member_no, total_price) "
+					   + "VALUES(order_seq.NEXTVAL, ?, ?)";
 			
 			try(Connection conn = connection.getConnection();
-					PreparedStatement pstmt = conn.prepareStatement(sql)) {
-				pstmt.setString(1, order.getOrderDate());  //??? 모르겠다
-				pstmt.setInt(2, order.getUserNumber());
-//				pstmt.setString(3, menuList); //????모르겠다
-				pstmt.setInt(3, order.getTotalPrice());
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				
+				pstmt.setInt(1, order.getMemberNo());
+				pstmt.setInt(2, order.getTotalPrice());
+			
 				if(pstmt.executeUpdate() == 1) {
 					System.out.println("주문이 성공적으로 이루어졌습니다.");
 				} else {
@@ -35,7 +35,6 @@ public class OrderRepository {
 			}
 			
 		}
-				
 		
 	}
 

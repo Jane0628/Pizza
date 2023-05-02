@@ -1,4 +1,4 @@
-package com.pizza.custommer;
+package com.pizza.custommer.controller;
 
 import static com.pizza.view.AppUI.inputInteger;
 import static com.pizza.view.AppUI.inputString;
@@ -6,13 +6,13 @@ import static com.pizza.view.AppUI.nonmemMenu;
 import static com.pizza.view.AppUI.memberMenu;
 
 import com.pizza.common.AppService;
-import com.pizza.user.domain.User;
-import com.pizza.user.repository.UserRepository;
+import com.pizza.custommer.domain.Member;
+import com.pizza.custommer.repository.MemberRepository;
 import com.pizza.check.CheckMember;
 
 
 public class NonMemMenu implements AppService {
-	private final UserRepository userRepository = new UserRepository();
+	private final MemberRepository userRepository = new MemberRepository();
 
 
 	@Override
@@ -108,7 +108,7 @@ public class NonMemMenu implements AppService {
 		String address = inputString();
 		System.out.println(); 
 
-		User user = new User();
+		Member user = new Member();
 		user.setUserName(name);
 		user.setBirthDay(birthDay);
 		user.setAddress(address);
