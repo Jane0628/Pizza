@@ -84,6 +84,24 @@ import com.pizza.view.AppUI;
 			return userList;
 		}
 		
+		
+		//로그인 전화번호 확인 로직
+					public String passwordCheck(String userName) {
+					String sql = "SELECT phone_no FROM pizza_members WHERE member_name=?";
+					
+					try(Connection conn = connection.getConnection();
+							PreparedStatement pstmt = conn.prepareStatement(sql)) {
+						pstmt.setString(1, userName);
+						ResultSet rs = pstmt.executeQuery();
+						
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}	
+					return sql;
+					}
+		
+		
 		//회원번호로 정보 수정하기
 		public void changeUser(int cUserNum) {
 			System.out.println("\n수정하실 정보를 선택해주세요.\n1.전화번호 2.집 주소");
