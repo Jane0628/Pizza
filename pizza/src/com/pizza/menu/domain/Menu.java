@@ -41,9 +41,16 @@ public class Menu {
 
 	@Override
 	public String toString() {
-		return " 메뉴 번호 : " + menuNo +
-			   ", 메뉴명 : " + menuName +
-			   ", 가격 : " + price;
+		if(menuName.length() >= 12) {
+			return " # " + menuNo +
+				   ".\t메뉴명 : " + menuName +
+				   "\t 가격 : " + price + "원";
+		} else {
+			return " # " + menuNo +
+				   ".\t메뉴명 : " + menuName +
+				   "\t\t 가격 : " + price + "원";
+		}
+		
 	}	
 	
 }

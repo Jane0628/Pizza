@@ -18,11 +18,7 @@ public class BossMenu implements AppService {
 			case 1: // 메뉴 관리하기
 				service = new ManageMenu();
 				break;
-			case 2: // 주문 확인하기
-				checkOrder();
-				break;
-			case 3: // 매출 확인하기
-				checkSales();
+			case 2: // 매출 확인하기
 				break;
 				
 			default:
@@ -35,17 +31,6 @@ public class BossMenu implements AppService {
 			
 		}
 			
-	}
-
-	
-	
-	// 메뉴 관리하기
-	
-	// 주문 확인하기
-	private void checkOrder() {
-		// TODO Auto-generated method stub
-		
-	}
-	
+	}	
 	
 }

@@ -49,8 +49,7 @@ public class AppUI {
 	public static void bossMenu() {
 		System.out.println("\n-------------------*** 관리자 메뉴 ***-------------------");
 		System.out.println(" 1. 메뉴 관리하기");
-		System.out.println(" 2. 주문 확인하기");
-		System.out.println(" 3. 매출 확인하기");
+		System.out.println(" 2. 매출 확인하기");
 		System.out.println("---------------------------------------------------------");
 		System.out.println("진행하고 싶으신 메뉴의 번호를 입력해주시기 바랍니다.");
 		System.out.print(">>> ");

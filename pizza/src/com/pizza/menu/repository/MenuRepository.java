@@ -78,5 +78,31 @@ public class MenuRepository {
 		
 		return menuList;
 	}
+	
+	// 메뉴 번호로 메뉴 조회하기
+	public List<Menu> viewMenu(String keyword) {
+		String sql = "SELECT * FROM menu "
+				   + "WHERE menu_no LIKE '%" + keyword + "%' "
+			   	   + "ORDER BY menu_no";
+		
+		List<Menu> menuList = new ArrayList<>();
+		
+		try(Connection conn = connection.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery()) {
+				
+			while(rs.next()) {
+				Menu menu = new Menu(rs.getString("menu_no"),
+									 rs.getString("menu_name"),
+									 rs.getInt("price"));
+				menuList.add(menu);
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return menuList;
+	}
 
 }
