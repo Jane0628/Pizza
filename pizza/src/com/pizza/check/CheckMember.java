@@ -4,7 +4,6 @@ import static com.pizza.view.AppUI.customerMenu;
 import static com.pizza.view.AppUI.inputInteger;
 
 import com.pizza.common.AppService;
-import com.pizza.custommer.controller.MemberLogin;
 import com.pizza.custommer.controller.MemberMenu;
 import com.pizza.custommer.controller.NonMemMenu;
 
@@ -19,7 +18,7 @@ public class CheckMember implements AppService {
 		int sel = inputInteger();
 	
 		if(sel == 1) {
-			service = new MemberLogin();
+			service = new MemberMenu();
 		} else if(sel == 2) {
 			service = new NonMemMenu();
 		} else {

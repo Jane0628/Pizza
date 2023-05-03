@@ -45,6 +45,7 @@ public class AppUI {
 		System.out.println(" 사장님의 코드를 입력해주세요.");
 		System.out.print(" >>> ");
 	}
+
 	
 	// 메뉴 관리하기
 	public static void manageMenu() {
@@ -76,7 +77,7 @@ public class AppUI {
 		System.out.println("\n--------------------*** 회원 메뉴 ***--------------------");
 		System.out.println(" 1. 회원 정보 수정");
 		System.out.println(" 2. 회원 탈퇴");
-		System.out.println(" 3. 주문하기");
+		System.out.println(" 3. 처음 메뉴로 돌아가기");
 		System.out.println("---------------------------------------------------------");
 		System.out.println(" 진행하고 싶으신 메뉴의 번호를 입력해주시기 바랍니다.");
 		System.out.print(" >>> ");
@@ -86,7 +87,7 @@ public class AppUI {
 	public static void nonmemMenu() {
 		System.out.println("\n--------------------*** 비회원 메뉴 ***------------------");
 		System.out.println(" 1. 회원가입");
-		System.out.println(" 2. 주문하기");
+		System.out.println(" 2. 처음 메뉴로 돌아가기");
 		System.out.println("---------------------------------------------------------");
 		System.out.println(" 진행하고 싶으신 메뉴의 번호를 입력해주시기 바랍니다.");
 		System.out.print(" >>> ");

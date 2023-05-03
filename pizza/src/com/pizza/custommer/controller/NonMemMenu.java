@@ -6,11 +6,17 @@ import static com.pizza.view.AppUI.memberBenefit;
 import static com.pizza.view.AppUI.nonmemMenu;
 
 import com.pizza.common.AppService;
+import com.pizza.common.DataBaseConnection;
 import com.pizza.custommer.domain.Member;
 import com.pizza.custommer.service.NonMemService;
+import com.pizza.menu.repository.MenuRepository;
 
 
 public class NonMemMenu implements AppService {
+	
+	private DataBaseConnection connection = DataBaseConnection.getInstance();
+	
+	MenuRepository menuRepository = new MenuRepository();
 
 	private AppService service;
 	private final NonMemService nonMemService = new NonMemService();
@@ -28,13 +34,16 @@ public class NonMemMenu implements AppService {
 				beforeJoin();
 				break Loop;
 			case 2:
-				break Loop;
+				return;
+				
 			default:
 				System.out.println("\n 정확하게 다시 입력해주세요.");
 			}
 		}
 		
 	}
+	
+
 
 	//회원가입 전 혜택 공지
 	public boolean beforeJoin() {

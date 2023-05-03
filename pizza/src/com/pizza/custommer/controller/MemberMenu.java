@@ -6,30 +6,34 @@ import static com.pizza.view.AppUI.memberMenu;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.pizza.common.AppService;
 import com.pizza.common.DataBaseConnection;
 import com.pizza.custommer.domain.Member;
-import com.pizza.menu.domain.Menu;
+import com.pizza.custommer.service.MemberService;
 import com.pizza.menu.repository.MenuRepository;
 
 public class MemberMenu implements AppService {
 
+	private Member loginMember = null;
+	
+	private MemberService memberService = new MemberService();
 
-	private DataBaseConnection connection = 
-			DataBaseConnection.getInstance();
-
-	private MenuRepository menuRepository = new MenuRepository();
+	private DataBaseConnection connection = DataBaseConnection.getInstance();
 
 
 	@Override
 	public void start() {
 
 		while(true) {
+			System.out.println("\n---------------------*** 로그인 ***----------------------");
+			System.out.print(" 회원님의 성함을 입력해주세요.\n >>> ");
+			String userName = inputString();
+			login(userName);
+			
+			
 			memberMenu();
 			int sel = inputInteger();
 
@@ -46,8 +50,7 @@ public class MemberMenu implements AppService {
 				return;
 
 			case 4:
-				order();
-				break;
+				return;
 
 			default:
 				System.out.print("정확하게 다시 입력해주세요.\n>>> ");
@@ -56,23 +59,41 @@ public class MemberMenu implements AppService {
 		}	
 
 	}
-
-
-	// 주문
-	private void order() {
-		List<Menu> menuList = menuRepository.viewWholeMenu();
-
-		System.out.printf("\n------------------------ 총 %d건 ------------------------\n", menuList.size());
-		for(Menu m : menuList) {
-			System.out.println(m);
-		}
-		System.out.println("---------------------------------------------------------");	
-	}
-
 	
+	// 이름, 전화번호 뒷자리 4개로 로그인
+		private void login(String userName) {
+			List<Member> memberList = memberService.findByUserName(userName);
+			
+			if(memberList.size() > 0) {
+				System.out.print("\n 전화번호 뒷자리를 입력해주세요.\n >>> ");
+				String fourPN = inputString();
+				
+				boolean flag = false;
+				for(Member m : memberList) {
+					
+					// 010-1234-5678
+					String phoneNum = m.getPhoneNumber();
+					
+					// 5678
+					phoneNum = phoneNum.substring(phoneNum.length()-4);
+					
+					if(phoneNum.equals(fourPN)) {
+						loginMember = m;
+						flag = true;
+						break;
+					}
+					
+				}
+				
+				if(!flag) {
+					System.out.println("\n 전화번호가 일치하는 회원이 없습니다.");
+				} else {
+					System.out.println("\n 환영합니다, '" + userName + "'님!");
+				}
+			}
 
-
-
+		}
+	
 
 	//회원번호로 정보 수정하기
 	public void changeUser() {
@@ -132,6 +153,7 @@ public class MemberMenu implements AppService {
 		if(loginMember != null) {
 			System.out.println("정말로 탈퇴하시겠습니까? (Y/N)");
 			String answer = inputString().toUpperCase();
+			
 			switch (answer.toUpperCase()) {
 			case "Y": case "ㅛ":
 
@@ -158,31 +180,11 @@ public class MemberMenu implements AppService {
 				System.out.print("\n정확하게 다시 입력해주세요.\n>>> ");
 				answer = inputString().toUpperCase();
 
-
-			}} else {
-				System.out.println("로그인부터 진행해주세요.");
 			}
+
+		} else {
+			System.out.println(" 로그인부터 진행해주세요.");
+		}
 
 	}
 }
-
-
-
-
-
-//	// 검색 결과 출력
-//	private int showSearchResult() {
-//		List<Member> users;
-//		if(!users.isEmpty()) {
-//			System.out.println("\n---------------------- 회원 조회 결과 --------------------------");
-//			for(Member user : users) {
-//				System.out.println(user);
-//			}
-//		} else {
-//			System.out.println("\n조회 결과가 없습니다.");
-//			System.out.println("처음 화면으로 이동합니다.\n");
-//		}
-//
-//		return users.size();
-//	}
-//}
