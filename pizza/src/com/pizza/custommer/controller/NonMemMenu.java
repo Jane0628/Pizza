@@ -1,22 +1,29 @@
 package com.pizza.custommer.controller;
 
 import static com.pizza.view.AppUI.inputInteger;
+import static com.pizza.menu.repository.MenuRepository.*;
 import static com.pizza.view.AppUI.inputString;
 import static com.pizza.view.AppUI.nonmemMenu;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import com.pizza.common.AppService;
 import com.pizza.common.DataBaseConnection;
 import com.pizza.custommer.domain.Member;
+import com.pizza.menu.domain.Menu;
+import com.pizza.menu.repository.MenuRepository;
+import com.pizza.order.domain.Order;
 
 
 public class NonMemMenu implements AppService {
 	
 	private DataBaseConnection connection = 
 			DataBaseConnection.getInstance();
+	
+	MenuRepository menuRepository = new MenuRepository();
 
 	@Override
 	public void start() {
@@ -30,8 +37,7 @@ public class NonMemMenu implements AppService {
 				beforeJoin();
 				break Loop;
 			case 2:
-				join(); //주문으로 나중에 수정
-				break Loop;
+				return;
 			default:
 				System.out.println("\n정확하게 다시 입력해주세요.\n>>> ");
 				System.out.println();
@@ -39,6 +45,8 @@ public class NonMemMenu implements AppService {
 			}
 		}
 	}
+	
+
 
 	//회원가입 전 혜택 공지
 	public boolean beforeJoin() {

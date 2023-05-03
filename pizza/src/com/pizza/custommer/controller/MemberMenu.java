@@ -43,10 +43,10 @@ public class MemberMenu implements AppService {
 			case 3:
 				deleteUser();
 				return;
-
+				
 			case 4:
-				//				order();
-				break;
+				return;
+
 
 			default:
 				System.out.print("정확하게 다시 입력해주세요.\n>>> ");
@@ -55,21 +55,6 @@ public class MemberMenu implements AppService {
 		}	
 
 	}
-
-
-		// 주문
-		private void order() {
-			viewWholeMenu();
-			
-	
-//				Order order = new Order();
-//				order.setMemberNo(loginUserNum);
-//	
-//	
-//	
-//				orderRepository.addOrder(order);
-//	
-//			}
 
 
 
@@ -226,24 +211,3 @@ public class MemberMenu implements AppService {
 		
 	}
 }
-
-
-
-
-
-//	// 검색 결과 출력
-//	private int showSearchResult() {
-//		List<Member> users;
-//		if(!users.isEmpty()) {
-//			System.out.println("\n---------------------- 회원 조회 결과 --------------------------");
-//			for(Member user : users) {
-//				System.out.println(user);
-//			}
-//		} else {
-//			System.out.println("\n조회 결과가 없습니다.");
-//			System.out.println("처음 화면으로 이동합니다.\n");
-//		}
-//
-//		return users.size();
-//	}
-//}
