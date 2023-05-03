@@ -20,7 +20,7 @@ public class NonMemMenu implements AppService {
 
 	@Override
 	public void start() {
-		beforeJoin();
+		if(beforeJoin()) return;
 		Loop:while(true) {
 			nonmemMenu();
 			int sel = inputInteger();
@@ -41,7 +41,7 @@ public class NonMemMenu implements AppService {
 	}
 
 	//회원가입 전 혜택 공지
-	public void beforeJoin() {
+	public boolean beforeJoin() {
 		System.out.println("\n--------------------- 회원 가입 시 혜택 ---------------------");
 		System.out.println("1. 생일 당일 주문시 30% 할인!!");
 		System.out.println("2. 스탬프 10개 모으면 피자 한 판 무료!!");
@@ -53,10 +53,10 @@ public class NonMemMenu implements AppService {
 			switch (answer.toUpperCase()) {
 			case "Y": case "ㅛ":
 				join();
-				break Loop;
+				return true;
 			case "N": case "ㅜ":
 				System.out.println("\n비회원 메뉴로 돌아갑니다.\n");
-				return;
+				return false;
 			default:
 				System.out.print("\n정확하게 다시 입력해주세요.\n>>> ");
 				answer = inputString().toUpperCase();
@@ -119,10 +119,9 @@ public class NonMemMenu implements AppService {
 		
 
 
-		addUser(user);
+		addUser(user);//회원번호 왜 0으로 뜨는지 모르겠다
 
-		System.out.println("회원 메뉴로 이동합니다.\n");
-		//????회원메뉴로 이동하고 싶다
+		
 		return;
 		
 		

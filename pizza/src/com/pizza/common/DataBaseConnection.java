@@ -21,6 +21,9 @@ public class DataBaseConnection {
 					= new DataBaseConnection();
 	
 	public static DataBaseConnection getInstance() {
+		if(connection == null) {
+			connection = new DataBaseConnection();
+		}
 		return connection;
 	}
 	
