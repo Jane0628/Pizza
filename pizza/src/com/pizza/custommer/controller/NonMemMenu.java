@@ -14,7 +14,7 @@ import com.pizza.custommer.domain.Member;
 
 
 public class NonMemMenu implements AppService {
-	
+
 	private DataBaseConnection connection = 
 			DataBaseConnection.getInstance();
 
@@ -42,24 +42,26 @@ public class NonMemMenu implements AppService {
 
 	//회원가입 전 혜택 공지
 	public void beforeJoin() {
-		System.out.println("\n--------------------- 회원 가입 시 혜택 ---------------------");
-		System.out.println("1. 생일 당일 주문시 30% 할인!!");
-		System.out.println("2. 스탬프 10개 모으면 피자 한 판 무료!!");
-		System.out.println();
-		System.out.println("회원가입을 진행하시겠습니까? (Y/N)");
-		System.out.print(">>> ");
-		String answer = inputString().toUpperCase();
-		Loop: while(true) {
-			switch (answer.toUpperCase()) {
+		while(true) {
+			System.out.println("\n------------------- 회원 가입 시 혜택 -------------------");
+			System.out.println(" 1. 생일 당일 주문시 30% 할인!!");
+			System.out.println(" 2. 스탬프 10개 모으면 피자 한 판 무료!!");
+			System.out.println("---------------------------------------------------------");
+			System.out.println(" 회원가입을 진행하시겠습니까? [Y / N]");
+			System.out.print(" >>> ");
+			String answer = inputString().toUpperCase();
+
+			switch (answer) {
 			case "Y": case "ㅛ":
 				join();
-				break Loop;
+				return;
+
 			case "N": case "ㅜ":
 				System.out.println("\n비회원 메뉴로 돌아갑니다.\n");
 				return;
+
 			default:
-				System.out.print("\n정확하게 다시 입력해주세요.\n>>> ");
-				answer = inputString().toUpperCase();
+				System.out.println("\n정확하게 다시 입력해주세요.");
 			}
 		}
 
@@ -104,7 +106,7 @@ public class NonMemMenu implements AppService {
 			phone = inputString();
 		}
 
-		
+
 
 		System.out.println(); 
 		System.out.print("집 주소 : "); 
@@ -116,7 +118,7 @@ public class NonMemMenu implements AppService {
 		user.setBirthDay(birthDay);
 		user.setAddress(address);
 		user.setPhoneNumber(phone);
-		
+
 
 
 		addUser(user);
@@ -124,38 +126,38 @@ public class NonMemMenu implements AppService {
 		System.out.println("회원 메뉴로 이동합니다.\n");
 		//????회원메뉴로 이동하고 싶다
 		return;
-		
-		
-		
-		
+
+
+
+
 	}
-	
+
 	//회원 추가
-			public void addUser(Member user) {
-				System.out.println(user);
-				String sql = "INSERT INTO pizza_members "
-						+ "(member_no, member_name, b_day, phone_no, address)"
-						+ "VALUES(pizza_mem_seq.NEXTVAL,?,?,?,?)";
-				
-				
-				try(Connection conn = connection.getConnection();
-						PreparedStatement pstmt = conn.prepareStatement(sql)) {
-					
-					pstmt.setString(1, user.getUserName());
-				    pstmt.setString(2, user.getBirthDay());
-					pstmt.setString(3, user.getPhoneNumber());
-					pstmt.setString(4, user.getAddress());
-					
-					if(pstmt.executeUpdate() == 1) {
-						System.out.println("회원가입이 완료되었습니다."); //회원메뉴로 가고싶다
-						
-					} else {
-						System.out.println("회원 가입에 실패했습니다. 관리자에게 문의하세요.");
-					}			
-				} catch (Exception e) {
-					e.printStackTrace();
-				} 	
-			}
+	public void addUser(Member user) {
+		System.out.println(user);
+		String sql = "INSERT INTO pizza_members "
+				+ "(member_no, member_name, b_day, phone_no, address)"
+				+ "VALUES(pizza_mem_seq.NEXTVAL,?,?,?,?)";
+
+
+		try(Connection conn = connection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+			pstmt.setString(1, user.getUserName());
+			pstmt.setString(2, user.getBirthDay());
+			pstmt.setString(3, user.getPhoneNumber());
+			pstmt.setString(4, user.getAddress());
+
+			if(pstmt.executeUpdate() == 1) {
+				System.out.println("회원가입이 완료되었습니다."); //회원메뉴로 가고싶다
+
+			} else {
+				System.out.println("회원 가입에 실패했습니다. 관리자에게 문의하세요.");
+			}			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 	
+	}
 
 }
 
