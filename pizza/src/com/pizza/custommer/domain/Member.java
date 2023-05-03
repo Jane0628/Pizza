@@ -59,31 +59,14 @@ public class Member {
 	}
 
 
-	public String secretPhone(String phoneNumber) {
-		String answer = "";
-		String[] num = phoneNumber.split("");
-
-		int len = num.length;
-
-		for(int i = 0; i < len; i++) {
-			if(i < len - 4) 
-				answer += "*";
-			else
-				answer += num[i];
-		}
-
-		return answer;
-
-	}
-
 
 	@Override
 	public String toString() {
 		return  "회원번호: " + userNumber +  //추가할때 회원번호 왜 0으로 뜨는지 모르겠다
 				", 회원명: " + userName +
 				", 생일: " + birthDay +
-				", 전화번호: " + secretPhone(phoneNumber) +
-				", 주소: " + address.replaceAll("(?<=.{9}).", "*");            
+				", 전화번호: " + phoneNumber+
+				", 주소: " + address;            
 	}
 
 }
