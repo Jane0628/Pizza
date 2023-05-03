@@ -19,6 +19,7 @@ public class NonMemMenu implements AppService {
 	MenuRepository menuRepository = new MenuRepository();
 
 	private AppService service;
+	
 	private final NonMemService nonMemService = new NonMemService();
 	
 	@Override

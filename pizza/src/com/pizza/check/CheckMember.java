@@ -9,7 +9,6 @@ import com.pizza.custommer.controller.NonMemMenu;
 
 public class CheckMember implements AppService {
 
-
 	private AppService service;
 
 	@Override

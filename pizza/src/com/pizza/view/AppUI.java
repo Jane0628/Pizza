@@ -77,7 +77,7 @@ public class AppUI {
 		System.out.println("\n--------------------*** 회원 메뉴 ***--------------------");
 		System.out.println(" 1. 회원 정보 수정");
 		System.out.println(" 2. 회원 탈퇴");
-		System.out.println(" 3. 처음 메뉴로 돌아가기");
+		System.out.println(" 3. 로그아웃");
 		System.out.println("---------------------------------------------------------");
 		System.out.println(" 진행하고 싶으신 메뉴의 번호를 입력해주시기 바랍니다.");
 		System.out.print(" >>> ");
@@ -100,6 +100,16 @@ public class AppUI {
 		System.out.println(" 2. 스탬프 10개 모으면 피자 한 판 무료!!");
 		System.out.println("---------------------------------------------------------");
 		System.out.println(" 회원가입을 진행하시겠습니까? [Y / N]");
+		System.out.print(" >>> ");
+	}
+	
+	// 회원 정보 수정
+	public static void memberInfoUpdate() {
+		System.out.println("\n-----------------*** 회원 정보 수정 ***------------------");
+		System.out.println(" 1. 전화번호");
+		System.out.println(" 2. 집주소");
+		System.out.println("---------------------------------------------------------");
+		System.out.println(" 수정하고 싶으신 정보의 번호를 입력해주시기 바랍니다.");
 		System.out.print(" >>> ");
 	}
 
