@@ -30,8 +30,8 @@ public class AppUI {
 		System.out.println("\n 안녕하세요, 피자 배달 전문점 PIZZA입니다. :)");
 		System.out.println(" 진행하고 싶으신 메뉴의 번호를 입력해주시기 바랍니다.");
 		System.out.println("---------------------------------------------------------");
-		System.out.println(" 1. 관리");
-		System.out.println(" 2. 주문");
+		System.out.println(" 1. 메뉴 관리");
+		System.out.println(" 2. 회원 관리");
 		System.out.println("---------------------------------------------------------");
 		System.out.print(" >>> ");
 	}
@@ -45,15 +45,6 @@ public class AppUI {
 		System.out.print(" >>> ");
 	}
 	
-	// 사장 인증 후 관리 시스템 화면 출력
-	public static void bossMenu() {
-		System.out.println("\n-------------------*** 관리자 메뉴 ***-------------------");
-		System.out.println(" 1. 메뉴 관리하기");
-		System.out.println(" 2. 매출 확인하기");
-		System.out.println("---------------------------------------------------------");
-		System.out.println(" 진행하고 싶으신 메뉴의 번호를 입력해주시기 바랍니다.");
-		System.out.print(" >>> ");
-	}
 	
 	// 메뉴 관리하기
 	public static void manageMenu() {
@@ -96,7 +87,7 @@ public class AppUI {
 		System.out.println(" 1. 로그인");
 		System.out.println(" 2. 회원 정보 수정");
 		System.out.println(" 3. 회원 탈퇴");
-		System.out.println(" 4. 주문하기");
+		System.out.println(" 4. 처음 메뉴로 돌아가기");
 		System.out.println("---------------------------------------------------------");
 		System.out.println(" 진행하고 싶으신 메뉴의 번호를 입력해주시기 바랍니다.");
 		System.out.print(" >>> ");
@@ -106,7 +97,7 @@ public class AppUI {
 	public static void nonmemMenu() {
 		System.out.println("\n--------------------*** 비회원 메뉴 ***------------------");
 		System.out.println(" 1. 회원가입");
-		System.out.println(" 2. 주문하기");
+		System.out.println(" 2. 처음 메뉴로 돌아가기");
 		System.out.println("---------------------------------------------------------");
 		System.out.println(" 진행하고 싶으신 메뉴의 번호를 입력해주시기 바랍니다.");
 		System.out.print(" >>> ");
