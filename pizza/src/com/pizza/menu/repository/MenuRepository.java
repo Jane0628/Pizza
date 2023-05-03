@@ -95,7 +95,7 @@ public class MenuRepository {
 	
 	// 전메뉴 조회하기
 	public List<Menu> viewWholeMenu() {
-		String sql = "SELECT * FROM menu "
+		String sql = "SELECT * FROM main "
 				   + "ORDER BY menu_no";
 		
 		List<Menu> menuList = new ArrayList<>();
@@ -122,20 +122,38 @@ public class MenuRepository {
 	
 	// 메뉴 조회하기
 	public List<Menu> viewMenuThroughMenuName(String keyword) {
-		String sql = "SELECT * FROM menu "
-				   + "WHERE menu_name LIKE '%" + keyword + "%' "
-		   		   + "ORDER BY menu_no";
+		String sqlMain = "SELECT * FROM main "
+					   + "WHERE menu_name LIKE ? "
+		   		       + "ORDER BY menu_no";
+		
+		String sqlSide = "SELECT * FROM side "
+					   + "WHERE menu_name LIKE ? "
+			    	   + "ORDER BY menu_no";
 		
 		List<Menu> menuList = new ArrayList<>();
 		
 		try(Connection conn = connection.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery()) {
+			PreparedStatement pstmtMain = conn.prepareStatement(sqlMain);
+			PreparedStatement pstmtSide = conn.prepareStatement(sqlSide)) {
+			
+			pstmtMain.setString(1, "%" + keyword + "%");
+			pstmtSide.setString(1, "%" + keyword + "%");
 				
-			while(rs.next()) {
-				Menu menu = new Menu(rs.getString("menu_no"),
-									 rs.getString("menu_name"),
-									 rs.getInt("price"));
+			ResultSet rsMain = pstmtMain.executeQuery();
+			
+			while(rsMain.next()) {
+				Menu menu = new Menu(rsMain.getString("menu_no"),
+									 rsMain.getString("menu_name"),
+									 rsMain.getInt("price"));
+				menuList.add(menu);
+			}
+			
+			ResultSet rsSide = pstmtSide.executeQuery();
+			
+			while(rsSide.next()) {
+				Menu menu = new Menu(rsSide.getString("menu_no"),
+						 			 rsSide.getString("menu_name"),
+						 			 rsSide.getInt("price"));
 				menuList.add(menu);
 			}
 				
@@ -143,22 +161,33 @@ public class MenuRepository {
 			e.printStackTrace();
 		}
 		
-		Collections.sort(menuList, new Sort());
-		
 		return menuList;
 	}
 	
 	// 메뉴 번호로 메뉴 조회하기
 	public List<Menu> viewMenuThroughMenuNo(String keyword) {
-		String sql = "SELECT * FROM menu "
-				   + "WHERE menu_no = '" + keyword + "' "
-				   + "ORDER BY menu_no";
+		
+		String sql;
+		
+		if(keyword.contains("S")) {
+			sql = "SELECT * FROM side "
+		  	    + "WHERE menu_no = ? "
+			    + "ORDER BY menu_no";
+		} else {
+			sql = "SELECT * FROM main "
+				+ "WHERE menu_no = ? "
+				+ "ORDER BY menu_no";			
+		}
+		
 		List<Menu> menuList = new ArrayList<>();
 		
 		try(Connection conn = connection.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);) {
 				
+			pstmt.setString(1, sql);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
 				Menu menu = new Menu(rs.getString("menu_no"),
 									 rs.getString("menu_name"),
