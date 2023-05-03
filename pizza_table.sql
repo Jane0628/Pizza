@@ -56,11 +56,12 @@ CREATE SEQUENCE side_seq
     NOCYCLE
     NOCACHE;
 
-DROP TABLE menu;
+DROP TABLE main;
+DROP TABLE side;
 DROP SEQUENCE main_seq;
 DROP SEQUENCE side_seq;
 
-SELECT * FROM menu;
+SELECT * FROM main;
 
 -- 메인 더미 데이터
 INSERT INTO main VALUES('1', '콤비네이션 피자', 20500);
