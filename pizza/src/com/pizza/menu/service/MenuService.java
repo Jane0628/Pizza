@@ -90,6 +90,7 @@ public class MenuService implements AppService{
 		while(true) {
 			System.out.print(" 메뉴명 : ");
 			String menuName = inputString();
+			String selection = null;
 
 			List<Menu> menuList = menuRepository.viewMenuThroughMenuName(menuName);
 
@@ -114,7 +115,7 @@ public class MenuService implements AppService{
 					}
 
 					System.out.print(" >>> ");
-					String selection = inputString().toUpperCase();
+					selection = inputString().toUpperCase();
 
 					boolean flag = false;
 					for(Menu m : menuList) {
@@ -138,7 +139,7 @@ public class MenuService implements AppService{
 					break;
 				}
 			} else {
-				if(delete(menuList.get(0))) {
+				if(delete(menuList.get(0), selection)) {
 					break;
 				}
 			}
@@ -169,9 +170,9 @@ public class MenuService implements AppService{
 	/////////////////////////////////////////////////////////////////////////////////////////////
 
 	// 메뉴 삭제하기
-	private boolean delete(Menu menu) {
+	private boolean delete(Menu menu, String selection) {
 
-		if(menuRepository.deleteMenu(menu) == 1) {
+		if(menuRepository.deleteMenu(menu, selection) == 1) {
 			System.out.println("\n '" + menu.getMenuName() + "'를 삭제했습니다. :)");
 			return true;
 		} else {

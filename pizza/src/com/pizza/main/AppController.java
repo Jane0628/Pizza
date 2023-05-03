@@ -21,10 +21,12 @@ public class AppController {
 			break;
 			
 		default:
-			System.out.println("올바른 값으로 입력해주시기 바랍니다.");
+			System.out.println("\n 올바른 값으로 입력해주시기 바랍니다.");
 		}
 		
-		service.start();
+		if(service != null) {
+			service.start();			
+		}
 		
 	}
 	
