@@ -3,17 +3,20 @@ package com.pizza.custommer.controller;
 import static com.pizza.view.AppUI.inputInteger;
 import static com.pizza.view.AppUI.inputString;
 import static com.pizza.view.AppUI.nonmemMenu;
-import static com.pizza.view.AppUI.memberMenu;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 
 import com.pizza.common.AppService;
+import com.pizza.common.DataBaseConnection;
 import com.pizza.custommer.domain.Member;
-import com.pizza.custommer.repository.MemberRepository;
-import com.pizza.check.CheckMember;
 
 
 public class NonMemMenu implements AppService {
-	private final MemberRepository userRepository = new MemberRepository();
-
+	
+	private DataBaseConnection connection = 
+			DataBaseConnection.getInstance();
 
 	@Override
 	public void start() {
@@ -101,7 +104,7 @@ public class NonMemMenu implements AppService {
 			phone = inputString();
 		}
 
-		//전화번호 중복체크..?
+		
 
 		System.out.println(); 
 		System.out.print("집 주소 : "); 
@@ -116,7 +119,7 @@ public class NonMemMenu implements AppService {
 		
 
 
-		userRepository.addUser(user);
+		addUser(user);
 
 		System.out.println("회원 메뉴로 이동합니다.\n");
 		//????회원메뉴로 이동하고 싶다
@@ -126,6 +129,33 @@ public class NonMemMenu implements AppService {
 		
 		
 	}
+	
+	//회원 추가
+			public void addUser(Member user) {
+				System.out.println(user);
+				String sql = "INSERT INTO pizza_members "
+						+ "(member_no, member_name, b_day, phone_no, address)"
+						+ "VALUES(pizza_mem_seq.NEXTVAL,?,?,?,?)";
+				
+				
+				try(Connection conn = connection.getConnection();
+						PreparedStatement pstmt = conn.prepareStatement(sql)) {
+					
+					pstmt.setString(1, user.getUserName());
+				    pstmt.setString(2, user.getBirthDay());
+					pstmt.setString(3, user.getPhoneNumber());
+					pstmt.setString(4, user.getAddress());
+					
+					if(pstmt.executeUpdate() == 1) {
+						System.out.println("회원가입이 완료되었습니다."); //회원메뉴로 가고싶다
+						
+					} else {
+						System.out.println("회원 가입에 실패했습니다. 관리자에게 문의하세요.");
+					}			
+				} catch (Exception e) {
+					e.printStackTrace();
+				} 	
+			}
 
 }
 
