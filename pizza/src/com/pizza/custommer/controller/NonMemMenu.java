@@ -2,25 +2,23 @@ package com.pizza.custommer.controller;
 
 import static com.pizza.view.AppUI.inputInteger;
 import static com.pizza.view.AppUI.inputString;
+import static com.pizza.view.AppUI.memberBenefit;
 import static com.pizza.view.AppUI.nonmemMenu;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-
-
 import com.pizza.common.AppService;
-import com.pizza.common.DataBaseConnection;
 import com.pizza.custommer.domain.Member;
+import com.pizza.custommer.service.NonMemService;
 
 
 public class NonMemMenu implements AppService {
 
-	private DataBaseConnection connection = 
-			DataBaseConnection.getInstance();
-
+	private AppService service;
+	private final NonMemService nonMemService = new NonMemService();
+	
 	@Override
 	public void start() {
-		beforeJoin();
+		if(beforeJoin()) return;
+		
 		Loop:while(true) {
 			nonmemMenu();
 			int sel = inputInteger();
@@ -30,133 +28,96 @@ public class NonMemMenu implements AppService {
 				beforeJoin();
 				break Loop;
 			case 2:
-				join(); //주문으로 나중에 수정
 				break Loop;
 			default:
-				System.out.println("\n정확하게 다시 입력해주세요.\n>>> ");
-				System.out.println();
-				sel = inputInteger();
+				System.out.println("\n 정확하게 다시 입력해주세요.");
 			}
 		}
+		
 	}
 
 	//회원가입 전 혜택 공지
-	public void beforeJoin() {
+	public boolean beforeJoin() {
 		while(true) {
-			System.out.println("\n------------------- 회원 가입 시 혜택 -------------------");
-			System.out.println(" 1. 생일 당일 주문시 30% 할인!!");
-			System.out.println(" 2. 스탬프 10개 모으면 피자 한 판 무료!!");
-			System.out.println("---------------------------------------------------------");
-			System.out.println(" 회원가입을 진행하시겠습니까? [Y / N]");
-			System.out.print(" >>> ");
+			memberBenefit();
 			String answer = inputString().toUpperCase();
 
 			switch (answer) {
 			case "Y": case "ㅛ":
 				join();
-				return;
+				return true;
 
 			case "N": case "ㅜ":
-				System.out.println("\n비회원 메뉴로 돌아갑니다.\n");
-				return;
+				return false;
 
 			default:
-				System.out.println("\n정확하게 다시 입력해주세요.");
+				System.out.println("\n 정확하게 다시 입력해주세요.");
 			}
+			
 		}
-
 	}
-
-
+	
 
 	// 회원가입
 	public void join() {
-		System.out.println("------------------- 회원가입을 시작합니다 --------------------");
-		System.out.println("(생일은 가입 후에 변경이 불가능하니 정확히 입력해주세요!!!)");
-		System.out.print("이름 : ");
+		System.out.println("\n--------------*** 회원가입을 시작합니다 ***--------------");
+		System.out.println("(생일은 가입 후에 변경이 불가능하니 정확히 입력해주세요!)");
+		System.out.print(" 이름 : ");
 		String name = inputString();
 
 		String birthDay;
-
-		Loop: while(true) {
-			System.out.print("\n생일 (MMNN) : ");
+		while(true) {
+			System.out.print(" 생일 (MMNN) : ");
 			birthDay = inputString();
 
-			if(birthDay.length() != 4) { 										// 길이로 맞게 보내주셨는지 판단하기
-				System.out.println("\n생일을 월과 일만 정확하게 입력해주세요.");
+			// 길이로 맞게 보내주셨는지 판단하기
+			if(birthDay.length() != 4) { 										
+				System.out.println("\n 생일을 월과 일만 정확하게 입력해주세요.");
+				
+			// 첫 번째 두 번째 숫자로 올바른 월 확인하기
 			} else if((birthDay.charAt(0) != '0' && birthDay.charAt(0) != '1') 
-					|| birthDay.charAt(0) == '1' && Character.getNumericValue(birthDay.charAt(1)) > 2) { // 첫 번째 두 번째 숫자로 올바른 월 확인하기
-				System.out.println("\n유효한 월을 입력해주세요. [01 ~ 12]");
+					|| birthDay.charAt(0) == '1' && Character.getNumericValue(birthDay.charAt(1)) > 2) { 
+				System.out.println("\n 유효한 월을 입력해주세요. [01 ~ 12]");
+				
+			// 세 번째 네 번째 숫자로 올바른 날짜 확인하기
 			} else if(Character.getNumericValue(birthDay.charAt(2)) > 3 
 					|| birthDay.charAt(2) == '3' 
-					&& Character.getNumericValue(birthDay.charAt(3)) > 1){	// 세 번째 네번 째 숫자로 올바른 날짜 확인하기
-				System.out.println("\n유효한 날짜를 입력해주세요. [01 ~ 31]");
+					&& Character.getNumericValue(birthDay.charAt(3)) > 1){	
+				System.out.println("\n 유효한 날짜를 입력해주세요. [01 ~ 31]");
+				
 			} else {
-				break Loop;
+				break;
 			}
 		}
-
-		System.out.println(); 
-		System.out.print("전화번호 (XXX-XXXX-XXXX) : "); 
-		String phone = inputString();
-
-		while((!((phone.length()==13) && (phone.charAt(3) == '-') && (phone.charAt(8)== '-')))) {
-			System.out.println("\n'-'를 포함한 13자리의 형태로 입력해주세요.");
-			System.out.print("전화번호 (01X-XXXX-XXXX) : "); 
+		
+		String phone;
+		while(true) {
+			System.out.print(" 전화번호 (XXX-XXXX-XXXX) : "); 
 			phone = inputString();
+			
+			if(phone.length() == 13 && phone.charAt(3) == '-' && phone.charAt(8) == '-') {
+				break;
+			} else {
+				System.out.println("\n '-'를 포함한 13자리의 형태로 입력해주세요.");				
+			}
+			
 		}
-
-
-
-		System.out.println(); 
-		System.out.print("집 주소 : "); 
+		
+		System.out.print(" 집 주소 : "); 
 		String address = inputString();
-		System.out.println(); 
 
 		Member user = new Member();
 		user.setUserName(name);
 		user.setBirthDay(birthDay);
 		user.setAddress(address);
 		user.setPhoneNumber(phone);
-
-
-
-		addUser(user);
-
-		System.out.println("회원 메뉴로 이동합니다.\n");
-		//????회원메뉴로 이동하고 싶다
+		
+		if(nonMemService.addUser(user) == 1) {
+			service = new MemberMenu();
+			service.start();
+		}
+		
 		return;
-
-
-
-
-	}
-
-	//회원 추가
-	public void addUser(Member user) {
-		System.out.println(user);
-		String sql = "INSERT INTO pizza_members "
-				+ "(member_no, member_name, b_day, phone_no, address)"
-				+ "VALUES(pizza_mem_seq.NEXTVAL,?,?,?,?)";
-
-
-		try(Connection conn = connection.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-			pstmt.setString(1, user.getUserName());
-			pstmt.setString(2, user.getBirthDay());
-			pstmt.setString(3, user.getPhoneNumber());
-			pstmt.setString(4, user.getAddress());
-
-			if(pstmt.executeUpdate() == 1) {
-				System.out.println("회원가입이 완료되었습니다."); //회원메뉴로 가고싶다
-
-			} else {
-				System.out.println("회원 가입에 실패했습니다. 관리자에게 문의하세요.");
-			}			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 	
 	}
 
 }

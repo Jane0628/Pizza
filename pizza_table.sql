@@ -1,7 +1,7 @@
 
 -- 회원 테이블 생성 
 CREATE TABLE pizza_members (
-    member_no NUMBER(2),
+    member_no NUMBER(2) PRIMARY KEY,
     member_name VARCHAR2(10) NOT NULL,
     b_day VARCHAR2(4) NOT NULL,
     address VARCHAR2(100) NOT NULL,
