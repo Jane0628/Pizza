@@ -125,8 +125,8 @@ public class MenuRepository {
 
 			while(rsMain.next()) {
 				Menu menu = new Menu(rsMain.getString("menu_no"),
-						rsMain.getString("menu_name"),
-						rsMain.getInt("price"));
+									 rsMain.getString("menu_name"),
+									 rsMain.getInt("price"));
 				menuList.add(menu);
 			}
 

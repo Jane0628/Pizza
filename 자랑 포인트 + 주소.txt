@@ -8,3 +8,11 @@
 5. 정렬
 6. MenuService View()
 7. != 1
+
+
+
+주소
+
+1. 계획 (excel) : https://docs.google.com/spreadsheets/d/1UO-hNYkuIP8Ahg4sJf_CNXVoribnb-XP61XoZh0pzhg/edit?usp=sharing
+
+2. git : https://github.com/Jane0628/Pizza/tree/develop
