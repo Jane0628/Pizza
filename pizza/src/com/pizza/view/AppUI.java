@@ -16,7 +16,7 @@ public class AppUI {
 		try {
 			num = sc.nextInt();
 		} catch (InputMismatchException e) {
-			System.out.println("\n정수로 입력해 주세요.");
+			System.out.println("\n 정수로 입력해 주세요.");
 		} finally {
 			sc.nextLine();
 		}
@@ -33,6 +33,7 @@ public class AppUI {
 		System.out.println("---------------------------------------------------------");
 		System.out.println(" 1. 사장님 메뉴");
 		System.out.println(" 2. 손님 메뉴");
+		System.out.println(" 3. 프로그램 종료");
 		System.out.println("---------------------------------------------------------");
 		System.out.print(" >>> ");
 	}

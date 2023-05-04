@@ -20,17 +20,17 @@ public class MenuRepository {
 		switch (side) {
 		case "Y": case "ㅛ": {
 			sql = "INSERT INTO side "
-					+ "VALUES(side_seq.NEXTVAL, ?, ?)";
+				+ "VALUES(side_seq.NEXTVAL, ?, ?)";
 			break;
 		}
 
 		default:
 			sql = "INSERT INTO main "
-					+ "VALUES(main_seq.NEXTVAL, ?, ?)";			
+				+ "VALUES(main_seq.NEXTVAL, ?, ?)";			
 		}
 
 		try(Connection conn = connection.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
 			pstmt.setString(1, menu.getMenuName());
 			pstmt.setInt(2, menu.getPrice());
@@ -50,17 +50,28 @@ public class MenuRepository {
 
 	// 가격 수정하기
 	public int updatePrice(Menu menu, int newPrice) {
-		String sql = "UPDATE menu SET price = ? "
-				   + "WHERE menu_no = ?";
+		String sqlMain = "UPDATE main SET price = ? "
+				   	   + "WHERE menu_no = ?";
+		String sqlSide = "UPDATE side SET price = ? "
+					   + "WHERE menu_no = ?";
 
 		int a = 0;
 		try(Connection conn = connection.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			PreparedStatement pstmtMain = conn.prepareStatement(sqlMain);
+			PreparedStatement pstmtSide = conn.prepareStatement(sqlSide);) {
 
-			pstmt.setInt(1, newPrice);
-			pstmt.setString(2, menu.getMenuNo());
+			pstmtMain.setInt(1, newPrice);
+			pstmtMain.setString(2, menu.getMenuNo());
+			
+			pstmtSide.setInt(1, newPrice);
+			pstmtSide.setString(2, menu.getMenuNo());
 
-			a = pstmt.executeUpdate();
+			a = pstmtMain.executeUpdate();
+			
+			if(a == 0) {
+				a = pstmtSide.executeUpdate();				
+			}
+			
 		} catch (Exception e) {
 			System.out.println(" 오류가 발생했습니다.");
 		}
@@ -69,9 +80,8 @@ public class MenuRepository {
 
 	}
 
-
 	// 삭제하기
-	public int deleteMenu(Menu menu, String keyword) {
+	public int deleteMenu(Menu menu) {
 		String sqlMain = "DELETE FROM main WHERE menu_no = ?";
 		String sqlSide = "DELETE FROM side WHERE menu_no = ?";
 
@@ -83,10 +93,10 @@ public class MenuRepository {
 			pstmtMain.setString(1, menu.getMenuNo());
 			pstmtSide.setString(1, menu.getMenuNo());			
 
-			if(keyword.contains("S")) {
-				a = pstmtSide.executeUpdate();				
-			} else {
-				a = pstmtMain.executeUpdate();				
+			a = pstmtMain.executeUpdate();				
+			
+			if(a == 0) {
+				a = pstmtSide.executeUpdate();
 			}
 			
 		} catch (Exception e) {
@@ -124,8 +134,8 @@ public class MenuRepository {
 
 			while(rsSide.next()) {
 				Menu menu = new Menu(str.concat(rsSide.getString("menu_no")),
-						rsSide.getString("menu_name"),
-						rsSide.getInt("price"));
+									 rsSide.getString("menu_name"),
+									 rsSide.getInt("price"));
 				menuList.add(menu);
 			}
 
@@ -139,18 +149,18 @@ public class MenuRepository {
 	// 메뉴 조회하기
 	public List<Menu> viewMenuThroughMenuName(String keyword) {
 		String sqlMain = "SELECT * FROM main "
-				+ "WHERE menu_name LIKE ? "
-				+ "ORDER BY menu_no";
+					   + "WHERE menu_name LIKE ? "
+					   + "ORDER BY menu_no";
 
 		String sqlSide = "SELECT * FROM side "
-				+ "WHERE menu_name LIKE ? "
-				+ "ORDER BY menu_no";
+					   + "WHERE menu_name LIKE ? "
+					   + "ORDER BY menu_no";
 
 		List<Menu> menuList = new ArrayList<>();
 
 		try(Connection conn = connection.getConnection();
-				PreparedStatement pstmtMain = conn.prepareStatement(sqlMain);
-				PreparedStatement pstmtSide = conn.prepareStatement(sqlSide)) {
+			PreparedStatement pstmtMain = conn.prepareStatement(sqlMain);
+			PreparedStatement pstmtSide = conn.prepareStatement(sqlSide)) {
 
 			pstmtMain.setString(1, "%" + keyword + "%");
 			pstmtSide.setString(1, "%" + keyword + "%");
@@ -159,8 +169,8 @@ public class MenuRepository {
 
 			while(rsMain.next()) {
 				Menu menu = new Menu(rsMain.getString("menu_no"),
-						rsMain.getString("menu_name"),
-						rsMain.getInt("price"));
+									 rsMain.getString("menu_name"),
+									 rsMain.getInt("price"));
 				menuList.add(menu);
 			}
 
@@ -170,8 +180,8 @@ public class MenuRepository {
 
 			while(rsSide.next()) {
 				Menu menu = new Menu(str.concat(rsSide.getString("menu_no")),
-						rsSide.getString("menu_name"),
-						rsSide.getInt("price"));
+									 rsSide.getString("menu_name"),
+									 rsSide.getInt("price"));
 				menuList.add(menu);
 			}
 
@@ -189,13 +199,13 @@ public class MenuRepository {
 
 		if(keyword.contains("S")) {
 			sql = "SELECT * FROM side "
-					+ "WHERE menu_no = ? "
-					+ "ORDER BY menu_no";
+				+ "WHERE menu_no = ? "
+				+ "ORDER BY menu_no";
 			keyword = keyword.substring(1);
 		} else {
 			sql = "SELECT * FROM main "
-					+ "WHERE menu_no = ? "
-					+ "ORDER BY menu_no";			
+				+ "WHERE menu_no = ? "
+				+ "ORDER BY menu_no";			
 		}
 
 		List<Menu> menuList = new ArrayList<>();
@@ -209,8 +219,8 @@ public class MenuRepository {
 
 			while(rs.next()) {
 				Menu menu = new Menu(rs.getString("menu_no"),
-						rs.getString("menu_name"),
-						rs.getInt("price"));
+									 rs.getString("menu_name"),
+									 rs.getInt("price"));
 				menuList.add(menu);
 			}
 

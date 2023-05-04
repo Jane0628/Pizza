@@ -44,7 +44,7 @@ public class MenuService implements AppService{
 			}
 
 			default:
-				System.out.println("올바른 메뉴 번호를 입력해주세요.");
+				System.out.println("\n 올바른 메뉴 번호를 입력해주세요.");
 			}
 
 		}
@@ -139,7 +139,7 @@ public class MenuService implements AppService{
 					break;
 				}
 			} else {
-				if(delete(menuList.get(0), selection)) {
+				if(delete(menuList.get(0))) {
 					break;
 				}
 			}
@@ -170,9 +170,9 @@ public class MenuService implements AppService{
 	/////////////////////////////////////////////////////////////////////////////////////////////
 
 	// 메뉴 삭제하기
-	private boolean delete(Menu menu, String selection) {
+	private boolean delete(Menu menu) {
 
-		if(menuRepository.deleteMenu(menu, selection) == 1) {
+		if(menuRepository.deleteMenu(menu) == 1) {
 			System.out.println("\n '" + menu.getMenuName() + "'를 삭제했습니다. :)");
 			return true;
 		} else {

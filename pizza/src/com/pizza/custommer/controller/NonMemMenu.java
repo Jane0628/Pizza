@@ -6,7 +6,6 @@ import static com.pizza.view.AppUI.memberBenefit;
 import static com.pizza.view.AppUI.nonmemMenu;
 
 import com.pizza.common.AppService;
-import com.pizza.common.DataBaseConnection;
 import com.pizza.custommer.domain.Member;
 import com.pizza.custommer.service.NonMemService;
 import com.pizza.menu.repository.MenuRepository;
@@ -14,26 +13,23 @@ import com.pizza.menu.repository.MenuRepository;
 
 public class NonMemMenu implements AppService {
 	
-	private DataBaseConnection connection = DataBaseConnection.getInstance();
+	private AppService service;
+	private final NonMemService nonMemService = new NonMemService();
 	
 	MenuRepository menuRepository = new MenuRepository();
-
-	private AppService service;
-	
-	private final NonMemService nonMemService = new NonMemService();
 	
 	@Override
 	public void start() {
 		if(beforeJoin()) return;
 		
-		Loop:while(true) {
+		while(true) {
 			nonmemMenu();
 			int sel = inputInteger();
 
 			switch (sel) {
 			case 1:
 				beforeJoin();
-				break Loop;
+				return;
 			case 2:
 				return;
 				
@@ -43,7 +39,6 @@ public class NonMemMenu implements AppService {
 		}
 		
 	}
-	
 
 
 	//회원가입 전 혜택 공지

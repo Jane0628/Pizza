@@ -10,7 +10,8 @@ public class AppController {
 	private AppService service;
 	
 	// 사장인지 고객인지 구분하기
-	public void chooseSystem(int check) {
+	public boolean chooseSystem(int check) {
+		boolean flag = false;
 		
 		switch (check) {
 		case 1:
@@ -18,6 +19,10 @@ public class AppController {
 			break;
 		case 2:
 			service = new CheckMember();
+			break;
+		case 3:
+			flag = true;
+			System.out.println("\n 이용해주셔서 감사합니다. :)");
 			break;
 			
 		default:
@@ -27,6 +32,8 @@ public class AppController {
 		if(service != null) {
 			service.start();			
 		}
+		
+		return flag;
 		
 	}
 	

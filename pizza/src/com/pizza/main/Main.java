@@ -15,9 +15,10 @@ public class Main {
 		while(true) {
 			AppUI.checkBossOrCustomer();
 			int check = inputInteger();
-			controller.chooseSystem(check);
 			
-		
+			if(controller.chooseSystem(check)) {
+				break;				
+			}
 		}
 
 	}

@@ -1,28 +1,20 @@
 package com.pizza.custommer.controller;
 
-import static com.pizza.view.AppUI.*;
+import static com.pizza.view.AppUI.inputInteger;
+import static com.pizza.view.AppUI.inputString;
+import static com.pizza.view.AppUI.memberInfoUpdate;
+import static com.pizza.view.AppUI.memberMenu;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 import com.pizza.common.AppService;
-import com.pizza.common.DataBaseConnection;
 import com.pizza.custommer.domain.Member;
 import com.pizza.custommer.service.MemberService;
-import com.pizza.menu.repository.MenuRepository;
 
 public class MemberMenu implements AppService {
 
 	private Member loginMember = null;
-	
-	private AppService service;
-
 	private MemberService memberService = new MemberService();
-
-	private DataBaseConnection connection = DataBaseConnection.getInstance();
-
 
 	@Override
 	public void start() {
@@ -51,6 +43,7 @@ public class MemberMenu implements AppService {
 				}
 
 			case 3:
+				System.out.println("\n 이용해주셔서 감사합니다. :)");
 				return;
 
 			default:

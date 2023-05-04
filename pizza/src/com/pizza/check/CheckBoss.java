@@ -19,8 +19,8 @@ public class CheckBoss implements AppService {
 		if(code == 9999) {
 			service = new MenuService();
 		} else {
-			System.out.println("\n잘못된 코드를 입력하셨습니다.");
-			System.out.println("메인 화면으로 돌아갑니다.\n");
+			System.out.println("\n 잘못된 코드를 입력하셨습니다.");
+			System.out.println(" 메인 화면으로 돌아갑니다.");
 			return;
 		}
 
